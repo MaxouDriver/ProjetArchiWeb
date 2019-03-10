@@ -1,29 +1,27 @@
-# projetarchiweb
+# Projet Architecture Web
 
-## Project setup
-```
-npm install
-```
+### Tech
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Notre projet utilise plusieurs bibliothèques pour fonctionner :
 
-### Compiles and minifies for production
-```
-npm run build
-```
+* [VueJS] - framework javascript
+* [Babel] - compilateur javascript
+* [Vuetify] - framework css
 
-### Run your tests
-```
-npm run test
-```
+### Installation
 
-### Lints and fixes files
-```
-npm run lint
+Notre projet necessite [Vue.js](https://nodejs.org/) pour fonctionner.
+
+Marche a suivre pour installer notre projet  : 
+
+```sh
+$ git clone https://github.com/MaxouDriver/ProjetArchiWeb.git
+$ cd ProjetArchiWeb
+$ npm install
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Puis pour le lancer en local sur votre machine :
+
+```sh
+$ npm run serve
+```
