@@ -59,9 +59,11 @@ function performPost(url, params, successCallback, failureCallback){
 
 const DatabaseManager = {
     getZonesTouristiques(successCallback, failureCallback){
-        performGet("/api/zonesTouristiques", function(res){
+        performGet("/api/zonesTouristiques", undefined,
+        function(res){
             successCallback(res.data);
-        }, failureCallback);
+        }, 
+        failureCallback);
     }
 };
 
