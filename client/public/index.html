@@ -7,73 +7,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css">
   </head>
   <body>
     <noscript>
       <strong>We're sorry but projetarchiweb doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app">
-        <v-app light>
-         <v-toolbar class="white">
-           <v-toolbar-title v-text="title"></v-toolbar-title>
-         </v-toolbar>
-         <v-content>
-           <section>
-             <v-parallax src="./paris.jpg" height="600">
-               <v-layout
-                 column
-                 align-center
-                 justify-center
-                 class="white--text"
-               >
-                 <div id="header"></div>
-               </v-layout>
-             </v-parallax>
-           </section>
-     
-           <section>
-              <div id="content"></div>        
-           </section>
-     
-           <section>
-             <v-parallax src="https://raw.githubusercontent.com/vuetifyjs/parallax-starter/master/template/assets/section.jpg" height="380">
-                <div id="sparation"></div> 
-             </v-parallax>
-           </section>
-     
-           <section>
-            <div id="map"></div>
-           </section>
-     
-           <v-footer class="blue darken-2">
-             <v-layout row wrap align-center>
-               <v-flex xs12>
-                 <div class="white--text ml-3">
-                   Made with
-                   <v-icon class="red--text">favorite</v-icon>
-                   by <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a>
-                   and <a class="white--text" href="https://github.com/vwxyzjn">Costa Huang</a>
-                 </div>
-               </v-flex>
-             </v-layout>
-           </v-footer>
-         </v-content>
-       </v-app>
-      </div>
-      <script src="https://unpkg.com/vue/dist/vue.js"></script>
-      <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
-      <script>
-        new Vue({
-         el: '#app',
-         data () {
-           return {
-             title: 'Your Logo'
-           }
-         }
-       })
-      </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
-     </body>
+    <div id="app"></div>
+  </body>
 </html>

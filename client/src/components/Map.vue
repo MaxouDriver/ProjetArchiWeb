@@ -76,8 +76,6 @@ export default {
     margin: 10vw;
   }
   #leafletMap { 
-    height: 600px;
-	margin-right:10vw;
-margin-left:10vw; 
+    height: 100%;
   }
 </style>
