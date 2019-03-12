@@ -2,7 +2,7 @@
   <div id="leafletMap"></div>
 </template>
 <script>
-import ZonesTouristiques from '../APIs/ZonesTouristiques';
+import DataManager from '../utils/DataManager';
 import L from 'leaflet';
 
 export default {
@@ -44,7 +44,7 @@ export default {
     },
       initZonesTouristiques(){
         var thisRef = this;
-        ZonesTouristiques.getPolygons(function(res){
+        DataManager.getZonesTouristiques(function(res){
           res.forEach(element => {
             
           var geojsonFeature = {
@@ -76,6 +76,8 @@ export default {
     margin: 10vw;
   }
   #leafletMap { 
-    height: 600px; 
+    height: 600px;
+	margin-right:10vw;
+margin-left:10vw; 
   }
 </style>
