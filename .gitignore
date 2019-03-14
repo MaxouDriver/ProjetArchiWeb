@@ -20,5 +20,5 @@ yarn-error.log*
 *.sln
 *.sw*
 
-./server/serviceAccountKey.json
+server/serviceAccountKey.json
 serverInfos.json
