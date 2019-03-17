@@ -28,9 +28,12 @@
   import Footer from '../components/Footer.vue';
 
   export default{
-    el: '#app',
     components: {
       Toolbar,Header,Content,Separator,Footer
+    },
+    data(){
+      return {
+      }
     }
   }
  </script>

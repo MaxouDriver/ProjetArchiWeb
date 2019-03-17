@@ -20,5 +20,6 @@ yarn-error.log*
 *.sln
 *.sw*
 
+client/src/helpers/firebaseConfig.js
 server/serviceAccountKey.json
 serverInfos.json
