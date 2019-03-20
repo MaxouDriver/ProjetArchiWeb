@@ -32,7 +32,6 @@
 
 
 
-        <v-card flat>
             <div class="headline text-xs-center pa-5">
                <v-data-table
     :headers="headers"
@@ -49,6 +48,7 @@
     </template>
   </v-data-table>
             </div>
+		<v-card flat>
             <v-bottom-nav :value="true" absolute color="transparent" >
                 <v-btn color="teal" flat value="recent" >
                     <span>Morning</span>

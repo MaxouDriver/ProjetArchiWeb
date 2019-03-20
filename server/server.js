@@ -7,7 +7,7 @@ const app = express();
 const router = express.Router();
 const port = 4000;
 const serviceAccount = require("./serviceAccountKey.json");
-const databaseInformations = require("../serverInfos.json");
+const databaseInformations = require("../serverInfos.json"); 
 
 app.use(bodyParser.urlencoded({ extended: true }, { limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -25,6 +25,7 @@ router.get('/', function(req, res) {
   res.json({ message: 'Nothing here!'});
 });
 
+
 app.use('/api', router);
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log("Listening on port " + port));

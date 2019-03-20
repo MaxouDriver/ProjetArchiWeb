@@ -1,9 +1,9 @@
 <template>
   <v-layout row wrap>
-          <v-flex xs6 lg6>
+          <v-flex xs12 sm6>
               <DataSelector/>
            </v-flex>
-           <v-flex xs6 lg6>
+           <v-flex xs12 sm6>
               <Map/>
           </v-flex>
     </v-layout>
