@@ -15,6 +15,7 @@
     "firebase-admin": "^7.1.0",
     "firebaseui": "^3.5.2",
     "leaflet": "^1.4.0",
+    "leaflet.markercluster": "^1.4.1",
     "vue": "^2.6.6",
     "vue-router": "^3.0.2",
     "vuefire": "^1.4.5",
