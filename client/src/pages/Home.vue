@@ -11,7 +11,7 @@
       <section>
         <Separator title="Enjoy your trip, by planning every days" 
         subtitle="Be aware of the weather !" 
-        image="http://www.medef-idf.fr/wp-content/uploads/2018/10/paris.jpg"/>
+        image="https://firebasestorage.googleapis.com/v0/b/projetarchiweb-c206d.appspot.com/o/cobblestones-393455_1920.jpg?alt=media&token=d728ef8e-d87a-478b-b96a-b8be68fdb84a"/>
       </section>
       <v-footer class="blue darken-2">
         <Footer/>

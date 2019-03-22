@@ -4,6 +4,14 @@
           </v-toolbar-title>
 
           <v-spacer></v-spacer>
+          <v-toolbar-items class="hidden-sm-and-down">
+            <v-btn
+              v-for="item in menu"
+              :key="item.icon"
+              :to="item.link"
+              flat
+            >{{ item.title }}</v-btn>
+          </v-toolbar-items>
 
           <v-menu>
             <v-btn slot="activator" icon color="success">
@@ -12,9 +20,9 @@
             <v-list>
               <v-list-tile v-for="item in getCorrectList()" v-bind:key="item.value">
                 <v-list-tile-action>
-                  <v-btn v-on:click="logout(item.route)">
+                  <a v-on:click="logout(item.route)">
                     {{item.value}}
-                  </v-btn>
+                  </a>
                 </v-list-tile-action>
               </v-list-tile>
             </v-list>
@@ -31,7 +39,12 @@ export default {
       return {
           title: "PArchi",
           isAuthenticated: false,
-          img: "https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"
+          img: "https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png",
+          menu: [
+            { title: 'Home' },
+            { title: 'Calendar' },
+            { title: 'About' }
+          ]
       }
   },
   mounted() {
@@ -47,15 +60,14 @@ export default {
   methods: {
     getCorrectList(){
       if (this.isAuthenticated) {
-        return [{
-              value: "Logout",
-              route: "/"
-            }];
+        return [
+          {value: "Logout", route: "/"},
+          {value: "Settings", route: "/"}
+          ];
       }else{
-        return [{
-              value: "Connection",
-              route: "/login"
-            }];
+        return [
+          {value: "Connection", route: "/login"}
+          ];
       }
     },
     logout(path){
@@ -63,10 +75,14 @@ export default {
       if (AuthenticationManager.isAuthenticated()) {
         AuthenticationManager.logout();
       }
+    },
+    menuItems () {
+      return this.menu
     }
   }
 }
 </script>
 
 <style scoped>
+a { color: inherit; } 
 </style>
