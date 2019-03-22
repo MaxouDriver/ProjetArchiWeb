@@ -1,7 +1,7 @@
 const RequestManager = require('../utils/RequestManager.js')
 const CacheManager = require('../utils/CacheManager.js');
 
-function getAllData(successCallback, failureCallback){
+function getAllDataToilet(successCallback, failureCallback){
 	CacheManager.retreiveData("toilets",
 		function onDataRetrieved(storedData){
 			successCallback(storedData);
@@ -30,7 +30,7 @@ function getAllData(successCallback, failureCallback){
 
 exports.getToilets = function(req, res){
     console.log("/getToilets called");
-	getAllData(
+	getAllDataToilet(
 		function(data){
 			res.json({success: true, data: data.records})
 		},

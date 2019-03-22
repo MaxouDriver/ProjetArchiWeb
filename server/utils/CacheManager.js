@@ -12,7 +12,7 @@ exports.storeData = function(key, data, successCallback, failureCallback){
 }
 
 exports.retreiveData = function(key, onDataRetrieved, onNoDataRetrieved, failureCallback){
-    cache.get("zonesTouristiques", function(err, value){
+    cache.get(key, function(err, value){
 		if (!err) {
 			if (value == undefined){
                 onNoDataRetrieved();

@@ -42,15 +42,15 @@ export default {
           layer.bindPopup(feature.properties.popupContent);
       }
     },
-      initZonesTouristiques(){
-        var thisRef = this;
-        DataManager.getZonesTouristiques(function(res){
-          res.forEach(element => {
-            
+    initZonesTouristiques(){
+      var thisRef = this;
+      DataManager.getZonesTouristiques(function(res){
+        res.forEach(element => {
+          
           var geojsonFeature = {
             "type": "Feature",
             "properties": {
-               "popupContent": element.name
+                "popupContent": element.name
             },
             "geometry": {
               "type": "Point",
@@ -61,11 +61,11 @@ export default {
           L.geoJSON(geojsonFeature, {
               onEachFeature: thisRef.onEachFeature
           }).addTo(thisRef.map);
-            
-          });
-        },function(err){
-            thisRef.err = err
+          
         });
+      },function(err){
+          thisRef.err = err
+      });
     }
   }
 }

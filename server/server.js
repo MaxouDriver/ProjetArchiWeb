@@ -22,6 +22,7 @@ toilets = require('./routes/toilettes.js');
 weather = require('./routes/meteo.js');
 shop = require('./routes/commerces.js');
 
+
 router.route('/zonesTouristiques').get(zonesTouristiques.getZones);
 
 router.route('/toilets').get(toilets.getToilets);

@@ -64,6 +64,13 @@ const DatabaseManager = {
             successCallback(res.data);
         }, 
         failureCallback);
+    },
+    getToilets(successCallback, failureCallback){
+        performGet("/api/toilets", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
     }
 };
 

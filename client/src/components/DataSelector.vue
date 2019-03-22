@@ -50,9 +50,6 @@
     </v-card>
   </div>
 </template>
-
-
-
 <script>
 import DataManager from '../utils/DataManager';
 
@@ -74,7 +71,8 @@ import DataManager from '../utils/DataManager';
       activities: []
     }),
     mounted() {
-      this.initZonesTouristiques();
+      //this.initZonesTouristiques();
+      this.initToilets();
     },
     methods: {
       initZonesTouristiques(){
@@ -84,9 +82,22 @@ import DataManager from '../utils/DataManager';
             var result = [];
             res.forEach(element => {
               result.push({name: element.name, cathegory: 'zones touristiques'});
-              thisRef.activities = result;
+              thisRef.activities.push(result);
             });
           
+          },function(err){
+              thisRef.err = err;
+          }
+        );
+      },
+      initToilets(){
+
+        var thisRef = this;
+        DataManager.getToilets(
+          function(res){
+            res.forEach(element => {
+              thisRef.activities.push({name: element.fields.nom_voie, cathegory: 'toilet'});
+            });
           },function(err){
               thisRef.err = err;
           }
