@@ -7,7 +7,7 @@ function getAllData(successCallback, failureCallback){
 			successCallback(storedData);
 		},
 		function onNoDataRetrieved(){
-			RequestManager.performGet("https://opendata.paris.fr/api/records/1.0/search/?dataset=zones-touristiques-internationales",
+			RequestManager.performGet("https://opendata.paris.fr/api/records/1.0/search/?dataset=zones-touristiques-internationales&rows=100",
 				function(receivedData){
 					CacheManager.storeData("zonesTouristiques", receivedData,
 						function(data){

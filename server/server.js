@@ -20,13 +20,16 @@ firebase.initializeApp({
 zonesTouristiques = require('./routes/zonesTouristiques.js');
 toilets = require('./routes/toilettes.js');
 weather = require('./routes/meteo.js');
+shop = require('./routes/commerces.js');
 
 router.route('/zonesTouristiques').get(zonesTouristiques.getZones);
 
 router.route('/toilets').get(toilets.getToilets);
 
 router.route('/weather').get(weather.getWeather);
-router.route('/weather/current').get(weather.getWeatherCurrent)
+router.route('/weather/current').get(weather.getWeatherCurrent);
+
+router.route('/shops').get(shop.getShops);
 
 router.get('/', function(req, res) {
   res.json({ message: 'Nothing here!'});

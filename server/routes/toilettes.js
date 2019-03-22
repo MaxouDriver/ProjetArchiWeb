@@ -7,7 +7,7 @@ function getAllData(successCallback, failureCallback){
 			successCallback(storedData);
 		},
 		function onNoDataRetrieved(){
-			RequestManager.performGet("https://opendata.paris.fr/api/records/1.0/search/?dataset=sanisettesparis",
+			RequestManager.performGet("https://opendata.paris.fr/api/records/1.0/search/?dataset=sanisettesparis&rows=1000&facet=arrondissement&facet=horaires_ouverture",
 				function(receivedData){
 					CacheManager.storeData("toilets", receivedData,
 						function(data){
