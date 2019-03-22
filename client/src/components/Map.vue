@@ -20,6 +20,7 @@ export default {
   mounted() {
     this.initMap();
     this.initLayers();
+    this.initZonesTouristiques();
     this.initToilets();
   },
   methods: {
@@ -47,11 +48,14 @@ export default {
       var thisRef = this;
       DataManager.getZonesTouristiques(function(res){
         res.forEach(element => {
-          
+
           var geojsonFeature = {
             "type": "Feature",
             "properties": {
-                "popupContent": element.name
+                "popupContent": element.name,
+                "marker-color": "#f31c1c",
+                "marker-size": "medium",
+                "marker-symbol": ""
             },
             "geometry": {
               "type": "Point",

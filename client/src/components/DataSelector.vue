@@ -20,15 +20,15 @@
       </v-menu>
     </v-container>
 
-
-
-    <div class="headline text-xs-center pa-5">
-      <v-data-table :headers="headers" :items="activities" class="elevation-1">
+<v-data-table :headers="headers" :items="activities" class="elevation-1">
         <template v-slot:items="props">
           <td>{{ props.item.name }}</td>
           <td class="text-xs-right">{{ props.item.cathegory }}</td>
         </template>
       </v-data-table>
+
+    <div class="headline text-xs-center pa-5">
+      
     </div>
     <v-card flat>
       <v-bottom-nav :value="true" absolute color="transparent" >
@@ -71,33 +71,17 @@ import DataManager from '../utils/DataManager';
       activities: []
     }),
     mounted() {
-      //this.initZonesTouristiques();
-      this.initToilets();
+      this.initZonesTouristiques();
     },
     methods: {
       initZonesTouristiques(){
         var thisRef = this;
         DataManager.getZonesTouristiques(
           function(res){
-            var result = [];
             res.forEach(element => {
-              result.push({name: element.name, cathegory: 'zones touristiques'});
-              thisRef.activities.push(result);
+              thisRef.activities.push({name: element.name, cathegory: 'zones touristiques'});
             });
           
-          },function(err){
-              thisRef.err = err;
-          }
-        );
-      },
-      initToilets(){
-
-        var thisRef = this;
-        DataManager.getToilets(
-          function(res){
-            res.forEach(element => {
-              thisRef.activities.push({name: element.fields.nom_voie, cathegory: 'toilet'});
-            });
           },function(err){
               thisRef.err = err;
           }
