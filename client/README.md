@@ -17,11 +17,11 @@ Marche a suivre pour installer notre projet  :
 ```sh
 $ git clone https://github.com/MaxouDriver/ProjetArchiWeb.git
 $ cd ProjetArchiWeb
-$ npm install
+$ yarn install
 ```
 
 Puis pour le lancer en local sur votre machine :
 
 ```sh
-$ npm run serve
+$ yarn run serve
 ```
