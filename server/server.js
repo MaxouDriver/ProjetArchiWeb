@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const firebase = require("firebase-admin");
 
@@ -17,12 +16,15 @@ firebase.initializeApp({
   databaseURL: databaseInformations.databaseUrl
 });
 
+filters = require('./routes/filters.js');
+
 zonesTouristiques = require('./routes/zonesTouristiques.js');
 toilets = require('./routes/toilettes.js');
 weather = require('./routes/meteo.js');
 shop = require('./routes/commerces.js');
 news = require('./routes/news.js');
 
+router.route('/filters').get(filters.getFilters);
 
 router.route('/zonesTouristiques').get(zonesTouristiques.getZones);
 

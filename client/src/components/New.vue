@@ -3,7 +3,7 @@
     <v-layout row>
         <v-flex xs12 sm6 offset-sm3>
             <v-card>
-                <v-img :src="image" height="200px">
+                <v-img v-if="image != undefined" :src="image" height="200px">
                 </v-img>
 
                 <v-card-title primary-title>

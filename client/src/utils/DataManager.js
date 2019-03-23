@@ -78,6 +78,13 @@ const DatabaseManager = {
             successCallback(res.data);
         }, 
         failureCallback);
+    },
+    getFilters(successCallback, failureCallback){
+        performGet("/api/filters", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
     }
 };
 
