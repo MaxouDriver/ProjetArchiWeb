@@ -13,6 +13,9 @@
         subtitle="Be aware of the weather !" 
         image="https://firebasestorage.googleapis.com/v0/b/projetarchiweb-c206d.appspot.com/o/cobblestones-393455_1920.jpg?alt=media&token=d728ef8e-d87a-478b-b96a-b8be68fdb84a"/>
       </section>
+      <section>
+        <News/>
+      </section>
       <v-footer class="blue darken-2">
         <Footer/>
       </v-footer>
@@ -26,10 +29,11 @@
   import Content from '../components/Content.vue';
   import Separator from '../components/Separator.vue';
   import Footer from '../components/Footer.vue';
+  import News from '../components/News.vue';
 
   export default{
     components: {
-      Toolbar,Header,Content,Separator,Footer
+      Toolbar,Header,Content,Separator,Footer,News
     },
     data(){
       return {

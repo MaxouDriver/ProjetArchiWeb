@@ -1,26 +1,26 @@
-# Projet Architecture Web
+# Projet Architecture Web CLIENT
 
 ### Tech
 
-Notre projet utilise plusieurs bibliothèques pour fonctionner :
+Le coté client utilise plusieurs bibliothèques pour fonctionner :
 
-* [VueJS] - framework javascript
-* [Babel] - compilateur javascript
-* [Vuetify] - framework css
+* [firebase] - Utilisation de firebase ui pour l'authentification
+* [leaflet] - Leaflet, la carte utilisée.
+* [leaflet.markercluster] - Outils permettant de faire des cluster de marqueur (regroupement de points)
+* [vue] - VueJS, le framwork javascript que nous avons selectionné
+* [vue-router] - Vue-router, router qui nous permet de faire la navigation dans notre application
+* [vuefire] - Vuefire, integration de firebase a VueJS
+* [vuetify] - Vuefire, le framework css que ne avons choisi
 
 ### Installation
 
-Notre projet necessite [Vue.js](https://nodejs.org/) pour fonctionner.
-
-Marche a suivre pour installer notre projet  : 
+Pour installer toutes les dépendances nécessaires  : 
 
 ```sh
-$ git clone https://github.com/MaxouDriver/ProjetArchiWeb.git
-$ cd ProjetArchiWeb
 $ yarn install
 ```
 
-Puis pour le lancer en local sur votre machine :
+Puis pour lancer le serveur : 
 
 ```sh
 $ yarn run serve

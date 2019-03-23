@@ -71,6 +71,13 @@ const DatabaseManager = {
             successCallback(res.data);
         }, 
         failureCallback);
+    },
+    getNews(successCallback, failureCallback){
+        performGet("/api/topHeadlinesNews", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
     }
 };
 

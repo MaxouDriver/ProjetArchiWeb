@@ -22,4 +22,5 @@ yarn-error.log*
 
 client/src/helpers/firebaseConfig.js
 server/serviceAccountKey.json
+server/apiKey.js
 serverInfos.json

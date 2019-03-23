@@ -21,6 +21,7 @@ zonesTouristiques = require('./routes/zonesTouristiques.js');
 toilets = require('./routes/toilettes.js');
 weather = require('./routes/meteo.js');
 shop = require('./routes/commerces.js');
+news = require('./routes/news.js');
 
 
 router.route('/zonesTouristiques').get(zonesTouristiques.getZones);
@@ -31,6 +32,8 @@ router.route('/weather').get(weather.getWeather);
 router.route('/weather/current').get(weather.getWeatherCurrent);
 
 router.route('/shops').get(shop.getShops);
+
+router.route('/topHeadlinesNews').get(news.getTopHeadlinesNews);
 
 router.get('/', function(req, res) {
   res.json({ message: 'Nothing here!'});

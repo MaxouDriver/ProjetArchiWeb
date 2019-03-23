@@ -10,11 +10,13 @@ function getAllData(successCallback, failureCallback){
       var shops = [];
       var ii = 0;
       var arroSuccess = function(receivedData){
-        shops.push(receivedData);
+				shops.push(receivedData);
         if (ii==19) {
           CacheManager.storeData("shops", shops,
             function(data){
-              successCallback(data);
+							console.log(data);
+							successCallback(data);
+							return;
             },
             function(err){
               failureCallback(err);
@@ -22,7 +24,7 @@ function getAllData(successCallback, failureCallback){
           );
         }
         ii++;
-      }
+			}
       for(var i = 75001; i<75021; i++){
         console.log(i);
   			RequestManager.performGet("https://opendata.paris.fr/api/records/1.0/search/?dataset=commercesparis&q=arro%3D"+i+"&rows=8999&facet=arro&facet=situation&facet=libact",
