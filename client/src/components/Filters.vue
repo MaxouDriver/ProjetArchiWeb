@@ -20,7 +20,7 @@
           <v-scroll-x-transition group hide-on-leave>
             <v-chip v-for="(selection, i) in selectedItems" :key="i" color="grey" dark small>
               <v-icon left small>mdi-beer</v-icon>
-              {{ selection.name }}
+              {{ selection.display_name }}
             </v-chip>
           </v-scroll-x-transition>
         </v-card-text>
@@ -56,7 +56,7 @@ export default {
       getItemById(items, id){
         for (var i = 0; i < items.length; i++) { 
             if (items[i].id == id) {
-              return items[i];
+              return items[i].children != undefined ? undefined : items[i];
             }
             if (items[i].children != undefined) {
               var temp = this.getItemById(items[i].children, id);

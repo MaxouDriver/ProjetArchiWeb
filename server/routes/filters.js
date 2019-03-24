@@ -3,38 +3,46 @@ exports.getFilters = function(req, res){
         [
             {
               id: 0,
+              display_name: 'Shops',
               name: 'Shops',
               children: [
                 {
                   name: 'Restaurant',
+                  display_name: 'Restaurant',
                   children: [
                       {
                         id: 5,
-                        name: 'Chinese'
+                        name: 'Chinese',
+                        display_name: 'Chinese Restaurant'
                     },
                     {
                       id: 6,
-                        name: 'Italian'
+                        name: 'Italian',
+                        display_name: 'Italian Restaurant'
                     }
                 ]
                 },
                 {
                   id: 3,
-                  name: 'Food'
+                  name: 'Food',
+                  display_name: 'Food Shops'
                 },
                 {
                   id: 4,
-                  name: 'Clothes'
+                  name: 'Clothes',
+                  display_name: 'Clothes Shops'
                 }
               ]
             },
             {
               id: 1,
-              name: 'Touristiques area'
+              name: 'Touristiques area',
+              display_name: 'Touristiques area'
             },
             {
               id: 2,
-              name: 'Toilettes'
+              name: 'Toilets',
+              display_name: 'Toilets'
             }
           ]
     });
