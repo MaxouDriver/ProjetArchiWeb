@@ -14,7 +14,7 @@
       <v-flex xs12 md6>
         <v-card-text>
           <div v-if="selectedItems.length === 0" key="title" class="title font-weight-light grey--text pa-3 text-xs-center">
-            Select your favorite breweries
+            Select filters
           </div>
 
           <v-scroll-x-transition group hide-on-leave>
@@ -34,6 +34,9 @@ import DataManager from '../utils/DataManager.js';
 
 export default {
   name: 'Filters',
+  props: {
+    onFiltersUpdated: { type: Function }
+  },
   data: () => ({
       isLoading: false,
       tree: [],
@@ -77,6 +80,8 @@ export default {
 
           selections.push(item)
         }
+
+        this.onFiltersUpdated(selections);
 
         return selections
       }

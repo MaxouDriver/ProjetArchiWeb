@@ -51,9 +51,14 @@
   </div>
 </template>
 <script>
-import DataManager from '../utils/DataManager';
 
   export default {
+    name: 'DataSelector',
+    props: {
+      selectedFilters: Array,
+      zonesTouristiques: Array,
+      toilets: Array
+    },
     data: () => ({
       date: new Date().toISOString().substr(0, 10),
       menu: false,
@@ -67,25 +72,24 @@ import DataManager from '../utils/DataManager';
             value: 'nom'
           },
           { text: 'Cathegory', value: 'cathergory' }
-        ],
-      activities: []
+        ]
     }),
-    mounted() {
-      this.initZonesTouristiques();
+    mounted(){
     },
-    methods: {
-      initZonesTouristiques(){
+    computed: {
+      activities: function(){
+        var result = [];
         var thisRef = this;
-        DataManager.getZonesTouristiques(
-          function(res){
-            res.forEach(element => {
-              thisRef.activities.push({name: element.name, cathegory: 'zones touristiques'});
-            });
-          
-          },function(err){
-              thisRef.err = err;
-          }
-        );
+
+          this.selectedFilters.forEach(function(activity){
+            if (activity.name == "Touristiques area") {
+              thisRef.zonesTouristiques.forEach(element => {
+                result.push({name: element.name, cathegory: 'zones touristiques'});
+              });
+            }
+          });
+       
+        return result;
       }
     }
   }
