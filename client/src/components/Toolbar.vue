@@ -7,7 +7,7 @@
           <v-toolbar-items class="hidden-sm-and-down">
             <v-btn
               v-for="item in menu"
-              :key="item.icon"
+              :key="item.id"
               :to="item.link"
               flat
             >{{ item.title }}</v-btn>
@@ -37,13 +37,30 @@ export default {
   name: 'Toolbar',
   data () {
       return {
-          title: "PArchi",
+          title: "ParisGo",
           isAuthenticated: false,
           img: "https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png",
           menu: [
-            { title: 'Home' },
-            { title: 'Calendar' },
-            { title: 'About' }
+            { 
+              id: 0,
+              title: 'Home',
+              link: '/'
+            },
+            { 
+              id: 1,
+              title: 'Calendar',
+              link: '/calendar'
+            },
+            { 
+              id: 2,
+              title: 'Contact',
+              link: '/contact'
+            },
+            { 
+              id: 3,
+              title: 'About',
+              link: '/about' 
+            }
           ]
       }
   },

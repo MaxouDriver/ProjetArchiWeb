@@ -1,6 +1,5 @@
 <template>
   <v-app light>
-    <Toolbar/>
     <v-content>
       <section>
         <Header/>
@@ -24,7 +23,6 @@
 </template>
 
 <script>
-  import Toolbar from '../components/Toolbar.vue';
   import Header from '../components/Header.vue';
   import Content from '../components/Content.vue';
   import Separator from '../components/Separator.vue';
@@ -33,7 +31,7 @@
 
   export default{
     components: {
-      Toolbar,Header,Content,Separator,Footer,News
+      Header,Content,Separator,Footer,News
     },
     data(){
       return {
