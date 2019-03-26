@@ -1,9 +1,42 @@
 <template>
-  <div id="leafletMap"></div>
+  <div id="leafletMapContainer">
+    <div id="leafletMap"></div>
+    <v-layout row justify-center>
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <v-card>
+          <v-card-title>
+            <span class="headline">Add on planning</span>
+          </v-card-title>
+          <v-card-text>
+            <v-date-picker
+              v-model="date"
+              full-width
+              landscape
+              class="mt-3"
+            ></v-date-picker>
+            <br/>
+            <v-select
+              :items="items"
+              label="Outline style"
+              outline
+            ></v-select>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
+            <v-btn color="blue darken-1" flat @click="dialog = false">Add on my planning</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
+  </div>
 </template>
+
 <script>
 import L from 'leaflet';
 import 'leaflet.markercluster';
+import $ from "jquery";
+
 
 export default {
   name: 'Map',
@@ -20,13 +53,20 @@ export default {
   },
   data (){
     return {
+      date: new Date().toISOString().substr(0, 10),
+      items: ['Morning', 'Afternoon', 'Evening'],
+
+
       map: null,
       tileLayer: null,
       lastLayers: [],
       polygons: [],
       err: "",
       zonesTouristiquesLayers: undefined,
-      toiletsLayer: undefined
+      toiletsLayer: undefined,
+      dialog: false,
+      currentId: 0,
+      id: 0
     }
   },
   computed: {
@@ -97,11 +137,48 @@ export default {
     hideLayers(layer){
       this.map.removeLayer(layer);
     },
+    getGeojsonFeature(title, type, isPlannifiable, coordinates){
+      var geojsonFeature = {
+        "type": "Feature",
+        "properties": {
+            "id" : this.id++,
+            "title": title,
+            "type": type,
+            "plannifiable": isPlannifiable
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": coordinates
+        }
+      };
+      return geojsonFeature;
+    },
     onEachFeature(feature, layer) {
-      // does this feature have a property named popupContent?
-      if (feature.properties && feature.properties.popupContent) {
-          layer.bindPopup(feature.properties.popupContent);
+      var thisRef = this;
+      //var msg = '<h1>' + feature.properties.title + '</h1><br/><h3>' + feature.properties.type + '</h3><br/><button type="button" id="button-' + feature.properties.id + '">Click for more</button>';
+
+
+      // Create an element to hold all your text and markup
+      var container = $('<div />');
+
+      // Delegate all event handling for the container itself and its contents to the container
+      container.on('click', '.smallPolygonLink', function() {
+          //var ID = $(this).attr("data");
+          thisRef.dialog = true;
+      });
+
+      // Insert whatever you want into the container, using whichever approach you prefer
+      container.html("<h3>" + feature.properties.title + "</h3><br/><h6>" + feature.properties.type + "</h6><br/>");
+
+      if (feature.properties.plannifiable) {
+        var button = $("<button data=" + feature.properties.id + " class='smallPolygonLink'>Click me</button>");
+        button.css("background-color", "#4CAF50", "border",  "none", "color", "white", "padding", "15px 32px", "text-align", "center", "text-decoration", "none", "display", "inline-block", "font-size", "16px");
+        container.append(button);
       }
+      
+
+      // Insert the container into the popup
+      layer.bindPopup(container[0]);
     },
     getZonesTouristiquesLayer(){
       if (this.zonesTouristiquesLayers == undefined) {
@@ -109,21 +186,8 @@ export default {
         var result = [];
 
         this.zonesTouristiques.forEach(element => {
-
-          var geojsonFeature = {
-            "type": "Feature",
-            "properties": {
-                "popupContent": element.name,
-                "marker-color": "#f31c1c",
-                "marker-size": "medium",
-                "marker-symbol": ""
-            },
-            "geometry": {
-              "type": "Point",
-              "coordinates": element.coordinates
-            }
-          };
-          var zones = L.geoJSON(geojsonFeature, {
+          
+          var zones = L.geoJSON(thisRef.getGeojsonFeature(element.name, "Touristism area", true, element.coordinates), {
               onEachFeature: thisRef.onEachFeature
           });
           result.push(zones);
@@ -135,14 +199,17 @@ export default {
       return this.zonesTouristiquesLayers; 
     },
     getToiletsLayer(){
+      var thisRef = this;
+
       if (this.toiletsLayer == undefined) {
         var markers = L.markerClusterGroup();
 
         this.toilets.forEach(element => {
 
-            var title = element.fields.nom_voie;
-            var marker = L.marker(new L.LatLng(element.geometry.coordinates[1], element.geometry.coordinates[0]), { title: title});
-            marker.bindPopup(title);
+            var marker = L.geoJSON(thisRef.getGeojsonFeature(element.fields.nom_voie, "Toilet", false, element.geometry.coordinates), {
+                onEachFeature: thisRef.onEachFeature
+            });
+
             markers.addLayer(marker);
 
         });
@@ -160,6 +227,10 @@ export default {
     margin: 10vw;
   }
   #leafletMap { 
+    height: 100%;
+    z-index: 0;
+  }
+  #leafletMapContainer{
     height: 100%;
   }
 </style>
