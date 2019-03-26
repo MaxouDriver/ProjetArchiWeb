@@ -15,9 +15,6 @@
       <section>
         <News/>
       </section>
-      <v-footer class="blue darken-2">
-        <Footer/>
-      </v-footer>
     </v-content>
   </div>
 </template>
@@ -26,12 +23,11 @@
   import Header from '../components/Header.vue';
   import Content from '../components/Content.vue';
   import Separator from '../components/Separator.vue';
-  import Footer from '../components/Footer.vue';
   import News from '../components/News.vue';
 
   export default{
     components: {
-      Header,Content,Separator,Footer,News
+      Header,Content,Separator,News
     },
     data(){
       return {

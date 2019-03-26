@@ -17,10 +17,6 @@ function performGet(url, queries, successCallback, failureCallback){
         });
         const body = await response.json();
     
-        if (response.status === 401) {
-            //Not authenticated
-        }
-    
         return body;
     };
 
@@ -30,7 +26,7 @@ function performGet(url, queries, successCallback, failureCallback){
         failureCallback(err)}
     );
 }
-/*
+
 function performPost(url, params, successCallback, failureCallback){
     var doPostAjax = async (url, params) => {
         const response = await fetch(url, {
@@ -43,10 +39,6 @@ function performPost(url, params, successCallback, failureCallback){
         });
         const body = await response.json();
     
-        if (response.status !== 200) {
-            //Not authenticated
-        }
-    
         return body;
     };
 
@@ -55,9 +47,12 @@ function performPost(url, params, successCallback, failureCallback){
     }).catch(err => {
         failureCallback(err)}
     );
-};*/
+}
 
 const DatabaseManager = {
+    sendMail(params, successCallback, failureCallback){
+        performPost("/api/mail/send", params, successCallback, failureCallback);
+    },
     getZonesTouristiques(successCallback, failureCallback){
         performGet("/api/zonesTouristiques", undefined,
         function(res){

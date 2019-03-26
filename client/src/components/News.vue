@@ -1,6 +1,6 @@
 <template>
-    <v-carousel>
-        <v-carousel-item v-for="(n, k) in news" v-bind:key="k">
+    <v-carousel height="" hide-delimiters>
+        <v-carousel-item height="" v-for="(n, k) in news" v-bind:key="k">
             <New
                 :title="n.title"
                 :source="n.source"
@@ -57,5 +57,7 @@ export default {
 </script>
 
 <style scoped>
-  
+  #carousel{
+      height: 15vw;
+  }
 </style>
