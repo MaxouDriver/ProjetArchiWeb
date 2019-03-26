@@ -1,5 +1,5 @@
 <template>
-  <v-app light>
+  <div>
     <v-content>
       <section>
         <Header/>
@@ -19,7 +19,7 @@
         <Footer/>
       </v-footer>
     </v-content>
-  </v-app>
+  </div>
 </template>
 
 <script>
