@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import AuthenticationManager from '../utils/AuthenticationManager.js'
 import L from 'leaflet';
 import 'leaflet.markercluster';
 import $ from "jquery";
@@ -53,6 +54,8 @@ export default {
   },
   data (){
     return {
+      isAuthenticated: false,
+
       date: new Date().toISOString().substr(0, 10),
       items: ['Morning', 'Afternoon', 'Evening'],
 
@@ -92,6 +95,15 @@ export default {
   mounted() {
     this.initMap();
     this.initLayers();
+
+    var thisRef = this;
+    this.isAuthenticated = AuthenticationManager.isAuthenticated();
+    this.$root.$on('authenticated', () => {
+      thisRef.isAuthenticated = true;
+    })
+    this.$root.$on('notauthenticated', () => {
+      thisRef.isAuthenticated = false;
+    })
   },
   methods: {
     initMap() {
@@ -155,23 +167,27 @@ export default {
     },
     onEachFeature(feature, layer) {
       var thisRef = this;
-      //var msg = '<h1>' + feature.properties.title + '</h1><br/><h3>' + feature.properties.type + '</h3><br/><button type="button" id="button-' + feature.properties.id + '">Click for more</button>';
 
-
-      // Create an element to hold all your text and markup
       var container = $('<div />');
 
-      // Delegate all event handling for the container itself and its contents to the container
-      container.on('click', '.smallPolygonLink', function() {
-          //var ID = $(this).attr("data");
-          thisRef.dialog = true;
-      });
-
-      // Insert whatever you want into the container, using whichever approach you prefer
       container.html("<h3>" + feature.properties.title + "</h3><br/><h6>" + feature.properties.type + "</h6><br/>");
 
       if (feature.properties.plannifiable) {
-        var button = $("<button data=" + feature.properties.id + " class='smallPolygonLink'>Click me</button>");
+        var button;
+        if (thisRef.isAuthenticated) {
+          container.on('click', '.addToPlanning', function() {
+              //var ID = $(this).attr("data");
+              thisRef.dialog = true;
+          });
+
+          button = $("<button data=" + feature.properties.id + " class='addToPlanning'>Click me</button>");
+        }else{
+          container.on('click', '.connection', function() {
+              thisRef.$router.push("/login");
+          });
+
+          button = $("<button class='connection'>Connection</button>");
+        }
         button.css("background-color", "#4CAF50", "border",  "none", "color", "white", "padding", "15px 32px", "text-align", "center", "text-decoration", "none", "display", "inline-block", "font-size", "16px");
         container.append(button);
       }
