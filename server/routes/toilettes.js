@@ -30,9 +30,12 @@ function getAllDataToilet(successCallback, failureCallback){
 
 exports.getToilets = function(req, res){
     console.log("/getToilets called");
-	getAllDataToilet(
-		function(data){
-			res.json({success: true, data: data.records})
+	getAllDataToilet(function(data){
+			var result = [];
+			data.records.forEach(function(item){
+				result.push({name: item.fields.nom_voie, geometry: item.fields.geom, id: item.recordid});
+			});
+			res.json({success: true, data: result});
 		},
 		function(err){
 			res.json({success: false, message: err});

@@ -34,7 +34,7 @@ exports.getZones = function(req, res){
 		function(data){
 			var result = [];
 			data.records.forEach(function(item){
-				result.push({name: item.fields.name, coordinates: item.geometry.coordinates});
+				result.push({name: item.fields.name, geometry: item.fields.geo_shape, id: item.fields.source});
 			})
 			res.json({success: true, data: result})
 		},
