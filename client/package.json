@@ -2,7 +2,6 @@
   "name": "projetarchiweb",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://90.93.116.39:4000",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
