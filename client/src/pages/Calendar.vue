@@ -68,6 +68,16 @@ import AuthenticationManager from '../utils/AuthenticationManager.js'
       })
 
       this.$refs.calendar.scrollToTime('08:00')
+
+      this.$root.$on('addToPlanning', (date, moment, titre) => {
+        this.events.push(
+          {
+            title: titre,
+            date: date,
+            time: date,
+            duration: 45
+          });
+      })
     },
     computed: {
       // convert the list of events into a map of lists keyed by date
@@ -85,6 +95,7 @@ import AuthenticationManager from '../utils/AuthenticationManager.js'
   }
 
 </script>
+
 
 <style scoped>
   #container{
