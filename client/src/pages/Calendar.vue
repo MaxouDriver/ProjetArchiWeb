@@ -2,7 +2,7 @@
     <section>
       <v-layout id="container">
         <v-flex v-if="isAuthenticated">
-          <v-sheet height="400">
+          <v-sheet height="100%">
             <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
             <v-calendar ref="calendar" :now="today" :value="today" color="primary" type="week">
               <!-- the events at the top (all-day) -->
@@ -33,29 +33,13 @@
 
 <script>
 import AuthenticationManager from '../utils/AuthenticationManager.js'
+import DataManager from '../utils/DataManager.js'
 
   export default {
     data: () => ({
       isAuthenticated: false,
       today: '2019-03-27',
-      events: [
-        {
-          title: 'Weekly Meeting',
-          date: '2019-03-27',
-          time: '09:00',
-          duration: 45
-        },
-        {
-          title: 'Thomas\' Birthday',
-          date: '2019-03-28'
-        },
-        {
-          title: 'Mash Potatoes',
-          date: '2019-03-29',
-          time: '12:30',
-          duration: 180
-        }
-      ]
+      events: []
     }),
     mounted() {
       var thisRef = this;
@@ -67,17 +51,15 @@ import AuthenticationManager from '../utils/AuthenticationManager.js'
         thisRef.isAuthenticated = false;
       })
 
-      this.$refs.calendar.scrollToTime('08:00')
 
-      this.$root.$on('addToPlanning', (date, moment, titre) => {
-        this.events.push(
-          {
-            title: titre,
-            date: date,
-            time: date,
-            duration: 45
-          });
-      })
+      DataManager.getPlanning(AuthenticationManager.getUserId(), 
+        function(data){
+          thisRef.events = data;
+        },
+        function(){
+          
+        }
+      );
     },
     computed: {
       // convert the list of events into a map of lists keyed by date
@@ -100,7 +82,6 @@ import AuthenticationManager from '../utils/AuthenticationManager.js'
 <style scoped>
   #container{
     padding: 4vw;
-    margin: 4vw;
   }
   .my-event {
   overflow: hidden;

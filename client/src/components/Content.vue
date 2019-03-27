@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="content-container">
     <Filters :onFiltersUpdated="onFiltersUpdated"/>
     <v-layout row wrap>
           <v-flex xs12 sm6>

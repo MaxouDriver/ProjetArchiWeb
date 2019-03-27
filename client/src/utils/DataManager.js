@@ -33,7 +33,7 @@ function performPost(url, params, successCallback, failureCallback){
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: JSON.stringify(params)
         });
@@ -52,6 +52,9 @@ function performPost(url, params, successCallback, failureCallback){
 const DatabaseManager = {
     sendMail(params, successCallback, failureCallback){
         performPost("/api/mail/send", params, successCallback, failureCallback);
+    },
+    saveOnPlanning(params, successCallback, failureCallback){
+        performPost("/api/planning/add", params, successCallback, failureCallback);
     },
     getZonesTouristiques(successCallback, failureCallback){
         performGet("/api/zonesTouristiques", undefined,
@@ -76,6 +79,13 @@ const DatabaseManager = {
     },
     getFilters(successCallback, failureCallback){
         performGet("/api/filters", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    getPlanning(user, successCallback, failureCallback){
+        performGet("/api/planning", {user: user},
         function(res){
             successCallback(res.data);
         }, 

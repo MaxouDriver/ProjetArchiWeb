@@ -35,6 +35,7 @@
 
 <script>
 import AuthenticationManager from '../utils/AuthenticationManager.js'
+import DataManager from '../utils/DataManager.js'
 import L from 'leaflet';
 import 'leaflet.markercluster';
 import $ from "jquery";
@@ -146,7 +147,22 @@ export default {
       this.lastLayers = this.layers;
     },
     addToPlanning(){
-      this.$root.$emit('addToPlanning', this.date, this.moment, this.currentSelectedElementName);
+      DataManager.saveOnPlanning(
+        {
+          user: AuthenticationManager.getUserId(),
+          name: this.currentSelectedElementName, 
+          type: "zoneTouristique", 
+          time: "9:00",
+          date: this.date, 
+          moment: this.moment
+        },
+        function(){
+          alert("success");
+        },
+        function(){
+          alert("failure");
+        }
+      );
       this.dialog = false;
     },
     showLayer(layer){

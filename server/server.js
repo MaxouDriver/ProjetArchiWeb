@@ -1,21 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const firebase = require("firebase-admin");
 const nodemailer = require("nodemailer");
 
 const app = express();
 const router = express.Router();
 const port = 4000;
-const serviceAccount = require("./serviceAccountKey.json");
 const serverInfos = require("../serverInfos.json");
 
 app.use(bodyParser.urlencoded({ extended: true }, { limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
-
-firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
-  databaseURL: serverInfos.databaseUrl
-});
 
 async function sendMail(name, email, subject, text, successCallback, failureCallback) {
   // create reusable transporter object using the default SMTP transport
@@ -52,6 +45,7 @@ toilets = require('./routes/toilettes.js');
 weather = require('./routes/meteo.js');
 shop = require('./routes/commerces.js');
 news = require('./routes/news.js');
+planning = require('./routes/planning.js');
 
 router.route('/filters').get(filters.getFilters);
 
@@ -65,6 +59,9 @@ router.route('/weather/current').get(weather.getWeatherCurrent);
 router.route('/shops').get(shop.getShops);
 
 router.route('/topHeadlinesNews').get(news.getTopHeadlinesNews);
+
+router.route('/planning/add').post(planning.saveOnPlanning);
+router.route('/planning').get(planning.getPlanning);
 
 router.get('/', function(req, res) {
   res.json({ message: 'Nothing here!'});

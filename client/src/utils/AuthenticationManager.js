@@ -31,6 +31,9 @@ const AuthenticationManager = {
     logout(){
         localStorage.uid = undefined;
         firebase.auth().signOut();
+    },
+    getUserId(){
+        return localStorage.uid;
     }
 };
 
