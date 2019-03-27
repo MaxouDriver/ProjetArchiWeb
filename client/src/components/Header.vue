@@ -3,7 +3,7 @@
     <v-layout column align-center justify-center class="white--text">
       <h1 class="white--text mb-2 display-1 text-xs-center">{{title}}</h1>
       <div class="subheading mb-3 text-xs-center">{{subtitle}}</div>
-      <v-btn class="blue lighten-2 mt-5" dark large  href="/pre-made-themes">
+      <v-btn v-if="!isAuthenticated" class="blue lighten-2 mt-5" dark large  href="/pre-made-themes">
         {{buttonName}}
       </v-btn>
     </v-layout>
@@ -11,14 +11,27 @@
 </template>
 
 <script>
+import AuthenticationManager from '../utils/AuthenticationManager.js'
+
 export default {
   name: 'Header',
   data () {
       return {
+          isAuthenticated: false,
           title: "Tourism at Paris",
           subtitle: "The most efficient way to discover Paris",
           buttonName: "Connection"
       }
+  },
+  mounted() {
+    var thisRef = this;
+    this.isAuthenticated = AuthenticationManager.isAuthenticated();
+    this.$root.$on('authenticated', () => {
+      thisRef.isAuthenticated = true;
+    })
+    this.$root.$on('notauthenticated', () => {
+      thisRef.isAuthenticated = false;
+    })
   }
 }
 </script>

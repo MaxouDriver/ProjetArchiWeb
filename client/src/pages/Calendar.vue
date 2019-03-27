@@ -1,7 +1,7 @@
 <template>
     <section>
       <v-layout>
-        <v-flex v-if="authenticated">
+        <v-flex v-if="isAuthenticated">
           <v-sheet height="400">
             <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
             <v-calendar ref="calendar" :now="today" :value="today" color="primary" type="week">
@@ -24,7 +24,7 @@
           </v-sheet>
         </v-flex>
 
-        <v-flex v-if="!authenticated">
+        <v-flex v-if="!isAuthenticated">
           <h1>You need to be authenticated to get a planning</h1>
         </v-flex>
       </v-layout>
