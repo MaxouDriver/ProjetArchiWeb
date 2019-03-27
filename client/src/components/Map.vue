@@ -16,6 +16,7 @@
             ></v-date-picker>
             <br/>
             <v-select
+              v-model="moment"
               :items="items"
               label="Outline style"
               outline
@@ -24,7 +25,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-            <v-btn color="blue darken-1" flat @click="dialog = false">Add on my planning</v-btn>
+            <v-btn color="blue darken-1" flat @click="addToPlanning()">Add on my planning</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -57,6 +58,7 @@ export default {
       isAuthenticated: false,
 
       date: new Date().toISOString().substr(0, 10),
+      moment: undefined,
       items: ['Morning', 'Afternoon', 'Evening'],
 
 
@@ -68,8 +70,8 @@ export default {
       zonesTouristiquesLayers: undefined,
       toiletsLayer: undefined,
       dialog: false,
-      currentId: 0,
-      id: 0
+      currentSelectedElementName: "",
+      currentSelectedElementType: ""
     }
   },
   computed: {
@@ -143,24 +145,28 @@ export default {
 
       this.lastLayers = this.layers;
     },
+    addToPlanning(){
+      this.$root.$emit('addToPlanning', this.date, this.moment, this.currentSelectedElementName);
+      this.dialog = false;
+    },
     showLayer(layer){
       this.map.addLayer(layer)
     },
     hideLayers(layer){
       this.map.removeLayer(layer);
     },
-    getGeojsonFeature(title, type, isPlannifiable, coordinates){
+    getGeojsonFeature(id, title, type, isPlannifiable, geometry){
       var geojsonFeature = {
         "type": "Feature",
         "properties": {
-            "id" : this.id++,
+            "id" : id,
             "title": title,
             "type": type,
             "plannifiable": isPlannifiable
         },
         "geometry": {
-          "type": "Point",
-          "coordinates": coordinates
+          "type": geometry.type,
+          "coordinates": geometry.coordinates
         }
       };
       return geojsonFeature;
@@ -176,11 +182,12 @@ export default {
         var button;
         if (thisRef.isAuthenticated) {
           container.on('click', '.addToPlanning', function() {
-              //var ID = $(this).attr("data");
+              thisRef.currentSelectedElementName = $(this).attr("name");
+              thisRef.currentSelectedElementType = $(this).attr("type");
               thisRef.dialog = true;
           });
 
-          button = $("<button data=" + feature.properties.id + " class='addToPlanning'>Click me</button>");
+          button = $("<button name='" + feature.properties.title + "' type='" + feature.properties.type + "' class='addToPlanning'>Click me</button>");
         }else{
           container.on('click', '.connection', function() {
               thisRef.$router.push("/login");
@@ -203,7 +210,7 @@ export default {
 
         this.zonesTouristiques.forEach(element => {
           
-          var zones = L.geoJSON(thisRef.getGeojsonFeature(element.name, "Touristism area", true, element.coordinates), {
+          var zones = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, "Touristism area", true, element.geometry), {
               onEachFeature: thisRef.onEachFeature
           });
           result.push(zones);
@@ -222,7 +229,7 @@ export default {
 
         this.toilets.forEach(element => {
 
-            var marker = L.geoJSON(thisRef.getGeojsonFeature(element.fields.nom_voie, "Toilet", false, element.geometry.coordinates), {
+            var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, "Toilet", false, element.geometry), {
                 onEachFeature: thisRef.onEachFeature
             });
 
