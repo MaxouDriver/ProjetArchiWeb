@@ -46,7 +46,15 @@ export default {
     selectedFilters: Array, 
     zonesTouristiques: Array, 
     toilets: Array,
-    museums: Array
+    museums: Array,
+    frenchTraditionalRestaurant: Array,
+    satFastFood: Array,
+    standingFastFood: Array,
+    barAndCoffee: Array,
+    tea: Array,
+    artGallery: Array,
+    localProduct: Array,
+    souvenirShop: Array
   },
   watch: {
     selectedFilters() {
@@ -71,6 +79,16 @@ export default {
       zonesTouristiquesLayers: undefined,
       toiletsLayer: undefined,
       museumsLayer: undefined,
+      frenchTraditionalRestaurantLayer: undefined,
+      satFastFoodLayer: undefined,
+      standingFastFoodLayer: undefined,
+      barCoffeeLayer: undefined,
+      teaLayer: undefined,
+      artGalleryLayer: undefined,
+      localProductLayer: undefined,
+      souvenirLayer: undefined,
+
+
       dialog: false,
       currentSelectedElementName: "",
       currentSelectedElementType: ""
@@ -81,20 +99,97 @@ export default {
       var result = [];
       var thisRef = this;
 
+      var shopCat = false;
+      var restaurantCat = false;
+      var fastFoodCat = false;
+      var beverageCat = false;
+
       this.selectedFilters.forEach(function(activity){
-        if (activity.name == "Touristiques area") {
-          thisRef.getZonesTouristiquesLayer().forEach(function(e){
-            result.push(e);
-          });
-        }
+            shopCat = false;
+            restaurantCat = false;
+            fastFoodCat = false;
+            beverageCat = false;
 
-        if (activity.name == "Toilets") {
-          result.push(thisRef.getToiletsLayer());
-        }
+            switch(activity.name){
 
-        if (activity.name == "Museums") {
-          result.push(thisRef.getMuseumsLayer());
-        }
+              case "Touristiques area":
+                thisRef.getZonesTouristiquesLayer().forEach(function(e){
+                  result.push(e);
+                });
+                break;
+
+              case "Museums":
+                result.push(thisRef.getMuseumsLayer());
+                break;
+
+              case "Toilets":
+                result.push(thisRef.getToiletsLayer());
+                break;
+
+              case "Shops":
+                shopCat = true;
+                restaurantCat = true;
+                fastFoodCat = true;
+                beverageCat = true;
+                /* falls through */
+              case "Restaurant":
+                restaurantCat = true;
+                /* falls through */
+              case "French Traditional":
+                result.push(thisRef.getFrenchTraditionalRestaurantLayer());
+                if (restaurantCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Fast Food":
+                fastFoodCat = true;
+                break;
+              case "Sat":
+                result.push(thisRef.getSatFastFoodLayer());
+                if (fastFoodCat != true){
+                  break;
+                }
+                break;
+                /* falls through */
+              case "Standing":
+                result.push(thisRef.getStandingFastFoodLayer());
+                if (restaurantCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Beverage":
+                beverageCat = true;
+                break;
+              case "Bar/Coffee":
+                result.push(thisRef.getBarCoffeeLayer());
+                if (beverageCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Tea":
+                result.push(thisRef.getTeaLayer());
+                if (shopCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Art Gallery":
+                result.push(thisRef.getArtGalleryLayer());
+                if (shopCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Local Product":
+                result.push(thisRef.getLocalProductLayer());
+                if (shopCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Souvenir":
+                result.push(thisRef.getSouvenirLayer());
+                
+                break;
+                
+            }
       });
 
       return result;
@@ -242,69 +337,102 @@ export default {
 
       return this.zonesTouristiquesLayers; 
     },
-    getToiletsLayer(){
+    getMarkers(type, color, data){
+      var markers = L.markerClusterGroup();
       var thisRef = this;
 
-      if (this.toiletsLayer == undefined) {
-        var markers = L.markerClusterGroup();
+      data.forEach(element => {
 
-        this.toilets.forEach(element => {
+        var geojsonMarkerOptions = {
+            radius: 8,
+            fillColor: color,
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        };
 
-            var geojsonMarkerOptions = {
-                radius: 8,
-                fillColor: "#0078ff",
-                color: "#000",
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            };
-
-            var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, "Toilet", false, element.geometry), {
-                onEachFeature: thisRef.onEachFeature,
-                pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, geojsonMarkerOptions);
-                }
-            });
-
-            markers.addLayer(marker);
-
+        var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, type, false, element.geometry), {
+            onEachFeature: thisRef.onEachFeature,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojsonMarkerOptions);
+            }
         });
-        this.toilersLayer = markers;
+
+        markers.addLayer(marker);
+
+      });
+      return markers;
+    },
+    getToiletsLayer(){
+      if (this.toiletsLayer == undefined) {
+        this.toilersLayer = this.getMarkers("Toilets", "#00FF00", this.toilets);
       }
       
       return this.toilersLayer;
     },
     getMuseumsLayer(){
-      var thisRef = this;
-
       if (this.museumsLayer == undefined) {
-        var markers = L.markerClusterGroup();
-
-        this.museums.forEach(element => {
-          //alert(element);
-            var geojsonMarkerOptions = {
-                radius: 8,
-                fillColor: "#ff7800",
-                color: "#000",
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            };
-
-            var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, "Museums", false, element.geometry), {
-                onEachFeature: thisRef.onEachFeature,
-                pointToLayer: function (feature, latlng) {
-                    return L.circleMarker(latlng, geojsonMarkerOptions);
-                }
-            });
-
-            markers.addLayer(marker);
-
-        });
-        this.museumsLayer = markers;
+        this.museumsLayer = this.getMarkers("Museums", "#00FF00", this.museums);
       }
       
       return this.museumsLayer;
+    },
+    getFrenchTraditionalRestaurantLayer(){
+      if (this.frenchTraditionalRestaurantLayer == undefined) {
+        this.frenchTraditionalRestaurantLayer = this.getMarkers("FrenchTraditionalRestaurant", "#00FF00", this.frenchTraditionalRestaurant);
+      }
+      
+      return this.frenchTraditionalRestaurantLayer;
+    },
+    getSatFastFoodLayer(){
+      if (this.satFastFoodLayer == undefined) {
+        this.satFastFoodLayer = this.getMarkers("SatFastFoodLayer", "#00FF00", this.satFastFood);
+      }
+      
+      return this.satFastFoodLayer;
+    },
+    getStandingFastFoodLayer(){
+      if (this.standingFastFoodLayer == undefined) {
+        this.standingFastFoodLayer = this.getMarkers("StandingFastFoodLayer", "#00FF00", this.standingFastFood);
+      }
+      
+      return this.standingFastFoodLayer;
+    },
+    getBarCoffeeLayer(){
+      if (this.barCoffeeLayer == undefined) {
+        this.barCoffeeLayer = this.getMarkers("BarAndCoffee", "#00FF00", this.barAndCoffee);
+      }
+      
+      return this.barCoffeeLayer;
+    },
+    getTeaLayer(){
+      if (this.teaLayer == undefined) {
+        this.teaLayer = this.getMarkers("Tea", "#00FF00", this.tea);
+      }
+      
+      return this.teaLayer;
+    },
+    getArtGalleryLayer(){
+      if (this.artGalleryLayer == undefined) {
+        this.artGalleryLayer = this.getMarkers("ArtGallery", "#00FF00", this.artGallery);
+      }
+      
+      return this.artGalleryLayer;
+    },
+    getLocalProductLayer(){
+      if (this.localProductLayer == undefined) {
+        this.localProductLayer = this.getMarkers("LocalProduct", "#00FF00", this.localProduct);
+      }
+      
+      return this.localProductLayer;
+    },
+    getSouvenirLayer(){
+      if (this.souvenirLayer == undefined) {
+        this.souvenirLayer = this.getMarkers("SouvenirShop", "#00FF00", this.souvenirShop);
+      }
+      
+      return this.souvenirLayer;
     }
   }
 }

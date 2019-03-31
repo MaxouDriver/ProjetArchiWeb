@@ -38,7 +38,15 @@
       selectedFilters: Array,
       zonesTouristiques: Array,
       toilets: Array,
-      museums: Array
+      museums: Array,
+      frenchTraditionalRestaurant: Array,
+      satFastFood: Array,
+      standingFastFood: Array,
+      barAndCoffee: Array,
+      tea: Array,
+      artGallery: Array,
+      localProduct: Array,
+      souvenirShop: Array
     },
     data: () => ({
       date: new Date().toISOString().substr(0, 10),
@@ -62,11 +70,109 @@
         var result = [];
         var thisRef = this;
 
+        var shopCat = false;
+        var restaurantCat = false;
+        var fastFoodCat = false;
+        var beverageCat = false;
+
           this.selectedFilters.forEach(function(activity){
-            if (activity.name == "Touristiques area") {
-              thisRef.zonesTouristiques.forEach(element => {
-                result.push({name: element.name, cathegory: 'zones touristiques'});
-              });
+            shopCat = false;
+            restaurantCat = false;
+            fastFoodCat = false;
+            beverageCat = false;
+
+            switch(activity.name){
+
+              case "Touristiques area":
+                thisRef.zonesTouristiques.forEach(element => {
+                  result.push({name: element.name, cathegory: 'Zones touristiques'});
+                });
+                break;
+
+              case "Museums":
+                thisRef.museums.forEach(element => {
+                  result.push({name: element.name, cathegory: 'Museums'});
+                });
+                break;
+
+              case "Shops":
+                shopCat = true;
+                restaurantCat = true;
+                fastFoodCat = true;
+                beverageCat = true;
+                /* falls through */
+              case "Restaurant":
+                restaurantCat = true;
+                /* falls through */
+              case "French Traditional":
+                thisRef.frenchTraditionalRestaurant.forEach(element => {
+                  result.push({name: element.name, cathegory: 'French Traditional'});
+                });
+                if (restaurantCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Fast Food":
+                fastFoodCat = true;
+                break;
+              case "Sat":
+                thisRef.satFastFood.forEach(element => {
+                  result.push({name: element.name, cathegory: 'Sat'});
+                });
+                if (fastFoodCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Standing":
+                thisRef.standingFastFood.forEach(element => {
+                  result.push({name: element.name, cathegory: 'Standing'});
+                });
+                if (restaurantCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Beverage":
+                beverageCat = true;
+                break;
+              case "Bar/Coffee":
+                thisRef.barAndCoffee.forEach(element => {
+                  result.push({name: element.name, cathegory: 'Bar/Coffee'});
+                });
+                if (beverageCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Tea":
+                thisRef.tea.forEach(element => {
+                  result.push({name: element.name, cathegory: 'Tea'});
+                });
+                if (shopCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Art Gallery":
+                thisRef.artGallery.forEach(element => {
+                  result.push({name: element.name, cathegory: 'Art Gallery'});
+                });
+                if (shopCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Local Product":
+                thisRef.localProduct.forEach(element => {
+                  result.push({name: element.name, cathegory: 'Local Product'});
+                });
+                if (shopCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Souvenir":
+                thisRef.souvenirShop.forEach(element => {
+                  result.push({name: element.name, cathegory: 'Souvenir'});
+                });
+                
+                break;
+                
             }
           });
        

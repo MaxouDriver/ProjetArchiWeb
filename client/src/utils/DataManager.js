@@ -97,7 +97,69 @@ const DatabaseManager = {
             successCallback(res.data);
         }, 
         failureCallback);
-    }
+    },
+    getFrenchTraditionalRestaurant(successCallback, failureCallback){
+        performGet("/api/shops/restaurant/frenchTraditionalRestaurant", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+      getSatFastFood(successCallback, failureCallback){
+        performGet("/api/shops/restaurant/fastFood/sat", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+
+      getStandingFastFood(successCallback, failureCallback){
+        performGet("/api/shops/restaurant/fastFood/standing", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+
+      getBarAndCoffee(successCallback, failureCallback){
+        performGet("/api/shops/beverage/barCoffee", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+
+      getTea(successCallback, failureCallback){
+        performGet("/api/shops/beverage/tea", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+
+      getArtGallery(successCallback, failureCallback){
+        performGet("/api/shops/artGallery", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+
+      getLocalProduct(successCallback, failureCallback){
+        performGet("/api/shops/localProduct", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+
+     getSouvenirShop(successCallback, failureCallback){
+        performGet("/api/shops/souvenir", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
 };
 
 export default DatabaseManager;

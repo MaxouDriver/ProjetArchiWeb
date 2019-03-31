@@ -3,10 +3,32 @@
     <Filters :onFiltersUpdated="onFiltersUpdated"/>
     <v-layout row wrap>
           <v-flex xs12 sm6>
-              <DataSelector :selectedFilters="filters" :zonesTouristiques="zonesTouristiques" :toilets="toilets" :museums="museums"/>
+              <DataSelector :selectedFilters="filters" 
+              :zonesTouristiques="zonesTouristiques" 
+              :toilets="toilets" 
+              :museums="museums"
+              :frenchTraditionalRestaurant="frenchTraditionalRestaurant"
+              :satFastFood="satFastFood"
+              :standingFastFood="standingFastFood"
+              :barAndCoffee="barAndCoffee"
+              :tea="tea"
+              :artGallery="artGallery"
+              :localProduct="localProduct"
+              :souvenirShop="souvenirShop"/>
            </v-flex>
            <v-flex xs12 sm6>
-              <Map :selectedFilters="filters" :zonesTouristiques="zonesTouristiques" :toilets="toilets" :museums="museums"/>
+              <Map :selectedFilters="filters" 
+              :zonesTouristiques="zonesTouristiques" 
+              :toilets="toilets" 
+              :museums="museums"
+              :frenchTraditionalRestaurant="frenchTraditionalRestaurant"
+              :satFastFood="satFastFood"
+              :standingFastFood="standingFastFood"
+              :barAndCoffee="barAndCoffee"
+              :tea="tea"
+              :artGallery="artGallery"
+              :localProduct="localProduct"
+              :souvenirShop="souvenirShop"/>
           </v-flex>
     </v-layout>
   </div>
@@ -27,6 +49,7 @@ export default {
     this.initZonesTouristiques();
     this.initToilets();
     this.initMuseums();
+    this.initShops();
   },
   data() {
     return{
@@ -34,7 +57,15 @@ export default {
       filters: [],
       zonesTouristiques: [],
       toilets: [],
-      museums: []
+      museums: [],
+      frenchTraditionalRestaurant: [],
+      satFastFood: [],
+      standingFastFood: [],
+      barAndCoffee: [],
+      tea: [],
+      artGallery: [],
+      localProduct: [],
+      souvenirShop: []
     }
   },
   methods: {
@@ -63,6 +94,57 @@ export default {
       
       DataManager.getMuseums(function(res){
         thisRef.museums = res;
+      },function(err){
+         thisRef.err = err;
+      });
+    },
+    initShops(){
+      var thisRef = this;
+      
+      DataManager.getFrenchTraditionalRestaurant(function(res){
+        thisRef.frenchTraditionalRestaurant = res;
+      },function(err){
+         thisRef.err = err;
+      });
+
+      DataManager.getSatFastFood(function(res){
+        thisRef.satFastFood = res;
+      },function(err){
+         thisRef.err = err;
+      });
+
+      DataManager.getStandingFastFood(function(res){
+        thisRef.standingFastFood = res;
+      },function(err){
+         thisRef.err = err;
+      });
+
+      DataManager.getBarAndCoffee(function(res){
+        thisRef.barAndCoffee = res;
+      },function(err){
+         thisRef.err = err;
+      });
+
+      DataManager.getTea(function(res){
+        thisRef.tea = res;
+      },function(err){
+         thisRef.err = err;
+      });
+
+      DataManager.getArtGallery(function(res){
+        thisRef.artGallery = res;
+      },function(err){
+         thisRef.err = err;
+      });
+
+      DataManager.getLocalProduct(function(res){
+        thisRef.localProduct = res;
+      },function(err){
+         thisRef.err = err;
+      });
+
+      DataManager.getSouvenirShop(function(res){
+        thisRef.souvenirShop = res;
       },function(err){
          thisRef.err = err;
       });

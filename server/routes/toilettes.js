@@ -9,7 +9,11 @@ function getAllDataToilet(successCallback, failureCallback){
 		function onNoDataRetrieved(){
 			RequestManager.performGet("https://opendata.paris.fr/api/records/1.0/search/?dataset=sanisettesparis&rows=1000&facet=arrondissement&facet=horaires_ouverture",
 				function(receivedData){
-					CacheManager.storeData("toilets", receivedData,
+					var result = [];
+					receivedData.records.forEach(function(item){
+						result.push({name: item.fields.nom_voie, geometry: item.fields.geom, id: item.recordid});
+					});
+					CacheManager.storeData("toilets", result,
 						function(data){
 							successCallback(data);
 						},
@@ -31,11 +35,7 @@ function getAllDataToilet(successCallback, failureCallback){
 exports.getToilets = function(req, res){
     console.log("/getToilets called");
 	getAllDataToilet(function(data){
-			var result = [];
-			data.records.forEach(function(item){
-				result.push({name: item.fields.nom_voie, geometry: item.fields.geom, id: item.recordid});
-			});
-			res.json({success: true, data: result});
+			res.json({success: true, data: data});
 		},
 		function(err){
 			res.json({success: false, message: err});

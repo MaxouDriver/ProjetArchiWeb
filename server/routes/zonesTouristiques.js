@@ -9,7 +9,11 @@ function getAllData(successCallback, failureCallback){
 		function onNoDataRetrieved(){
 			RequestManager.performGet("https://opendata.paris.fr/api/records/1.0/search/?dataset=zones-touristiques-internationales&rows=100",
 				function(receivedData){
-					CacheManager.storeData("zonesTouristiques", receivedData,
+					var result = [];
+					receivedData.records.forEach(function(item){
+						result.push({name: item.fields.name, geometry: item.fields.geo_shape, id: item.fields.source});
+					});
+					CacheManager.storeData("zonesTouristiques", result,
 						function(data){
 							successCallback(data);
 						},
@@ -32,11 +36,7 @@ exports.getZones = function(req, res){
     console.log("/getZones called");
 	getAllData(
 		function(data){
-			var result = [];
-			data.records.forEach(function(item){
-				result.push({name: item.fields.name, geometry: item.fields.geo_shape, id: item.fields.source});
-			})
-			res.json({success: true, data: result})
+			res.json({success: true, data: data})
 		},
 		function(err){
 			res.json({success: false, message: err});

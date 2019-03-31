@@ -57,7 +57,14 @@ router.route('/toilets').get(toilets.getToilets);
 router.route('/weather').get(weather.getWeather);
 router.route('/weather/current').get(weather.getWeatherCurrent);
 
-router.route('/restaurants').get(shop.getRestaurants);
+router.route('/shops/restaurant/frenchTraditionalRestaurant').get(shop.getFrenchTraditionalRestaurant);
+router.route('/shops/restaurant/fastFood/sat').get(shop.getSatFastFood);
+router.route('/shops/restaurant/fastFood/standing').get(shop.getStandingFastFood);
+router.route('/shops/beverage/barCoffee').get(shop.getBarAndCoffee);
+router.route('/shops/beverage/tea').get(shop.getTea);
+router.route('/shops/artGallery').get(shop.getArtGallery);
+router.route('/shops/localProduct').get(shop.getLocalProduct);
+router.route('/shops/souvenir').get(shop.getSouvenirShop);
 
 router.route('/musees').get(musees.getMusees);
 
