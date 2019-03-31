@@ -40,13 +40,13 @@ import L from 'leaflet';
 import 'leaflet.markercluster';
 import $ from "jquery";
 
-
 export default {
   name: 'Map',
   props: {
     selectedFilters: Array, 
     zonesTouristiques: Array, 
-    toilets: Array
+    toilets: Array,
+    museums: Array
   },
   watch: {
     selectedFilters() {
@@ -70,6 +70,7 @@ export default {
       err: "",
       zonesTouristiquesLayers: undefined,
       toiletsLayer: undefined,
+      museumsLayer: undefined,
       dialog: false,
       currentSelectedElementName: "",
       currentSelectedElementType: ""
@@ -89,6 +90,10 @@ export default {
 
         if (activity.name == "Toilets") {
           result.push(thisRef.getToiletsLayer());
+        }
+
+        if (activity.name == "Museums") {
+          result.push(thisRef.getMuseumsLayer());
         }
       });
 
@@ -245,8 +250,20 @@ export default {
 
         this.toilets.forEach(element => {
 
+            var geojsonMarkerOptions = {
+                radius: 8,
+                fillColor: "#0078ff",
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            };
+
             var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, "Toilet", false, element.geometry), {
-                onEachFeature: thisRef.onEachFeature
+                onEachFeature: thisRef.onEachFeature,
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, geojsonMarkerOptions);
+                }
             });
 
             markers.addLayer(marker);
@@ -256,6 +273,38 @@ export default {
       }
       
       return this.toilersLayer;
+    },
+    getMuseumsLayer(){
+      var thisRef = this;
+
+      if (this.museumsLayer == undefined) {
+        var markers = L.markerClusterGroup();
+
+        this.museums.forEach(element => {
+          //alert(element);
+            var geojsonMarkerOptions = {
+                radius: 8,
+                fillColor: "#ff7800",
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            };
+
+            var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, "Museums", false, element.geometry), {
+                onEachFeature: thisRef.onEachFeature,
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, geojsonMarkerOptions);
+                }
+            });
+
+            markers.addLayer(marker);
+
+        });
+        this.museumsLayer = markers;
+      }
+      
+      return this.museumsLayer;
     }
   }
 }

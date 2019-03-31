@@ -37,7 +37,8 @@
     props: {
       selectedFilters: Array,
       zonesTouristiques: Array,
-      toilets: Array
+      toilets: Array,
+      museums: Array
     },
     data: () => ({
       date: new Date().toISOString().substr(0, 10),

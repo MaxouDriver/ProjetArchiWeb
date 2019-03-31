@@ -46,6 +46,7 @@ weather = require('./routes/meteo.js');
 shop = require('./routes/commerces.js');
 news = require('./routes/news.js');
 planning = require('./routes/planning.js');
+musees = require('./routes/musees.js');
 
 router.route('/filters').get(filters.getFilters);
 
@@ -56,7 +57,9 @@ router.route('/toilets').get(toilets.getToilets);
 router.route('/weather').get(weather.getWeather);
 router.route('/weather/current').get(weather.getWeatherCurrent);
 
-router.route('/shops').get(shop.getShops);
+router.route('/restaurants').get(shop.getRestaurants);
+
+router.route('/musees').get(musees.getMusees);
 
 router.route('/topHeadlinesNews').get(news.getTopHeadlinesNews);
 

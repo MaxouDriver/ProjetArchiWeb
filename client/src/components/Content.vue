@@ -3,10 +3,10 @@
     <Filters :onFiltersUpdated="onFiltersUpdated"/>
     <v-layout row wrap>
           <v-flex xs12 sm6>
-              <DataSelector :selectedFilters="filters" :zonesTouristiques="zonesTouristiques" :toilets="toilets"/>
+              <DataSelector :selectedFilters="filters" :zonesTouristiques="zonesTouristiques" :toilets="toilets" :museums="museums"/>
            </v-flex>
            <v-flex xs12 sm6>
-              <Map :selectedFilters="filters" :zonesTouristiques="zonesTouristiques" :toilets="toilets"/>
+              <Map :selectedFilters="filters" :zonesTouristiques="zonesTouristiques" :toilets="toilets" :museums="museums"/>
           </v-flex>
     </v-layout>
   </div>
@@ -26,19 +26,20 @@ export default {
   mounted(){
     this.initZonesTouristiques();
     this.initToilets();
+    this.initMuseums();
   },
   data() {
     return{
       err: "",
       filters: [],
       zonesTouristiques: [],
-      toilets: []
+      toilets: [],
+      museums: []
     }
   },
   methods: {
     onFiltersUpdated(filters){
       this.filters = filters;
-      this.$root.$emit('filtersChanged')
     },
     initZonesTouristiques(){
       var thisRef = this;
@@ -53,6 +54,15 @@ export default {
 
       DataManager.getToilets(function(res){
          thisRef.toilets = res;
+      },function(err){
+         thisRef.err = err;
+      });
+    },
+    initMuseums(){
+      var thisRef = this;
+      
+      DataManager.getMuseums(function(res){
+        thisRef.museums = res;
       },function(err){
          thisRef.err = err;
       });

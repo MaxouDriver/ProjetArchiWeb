@@ -40,6 +40,11 @@ exports.getFilters = function(req, res){
               display_name: 'Touristiques area'
             },
             {
+              id: 7,
+              name: 'Museums',
+              display_name: 'Museums'
+            },
+            {
               id: 2,
               name: 'Toilets',
               display_name: 'Toilets'

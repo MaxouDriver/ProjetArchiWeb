@@ -3,6 +3,7 @@ import Vuetify from 'vuetify'
 import Vuefire from 'vuefire'
 import 'vuetify/dist/vuetify.min.css'
 import '../node_modules/firebaseui/dist/firebaseui.css'
+import '../node_modules/firebaseui/dist/firebaseui.css'
 
 import AuthenticationManager from './utils/AuthenticationManager.js'
 

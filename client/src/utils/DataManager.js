@@ -90,6 +90,13 @@ const DatabaseManager = {
             successCallback(res.data);
         }, 
         failureCallback);
+    },
+    getMuseums(successCallback, failureCallback){
+        performGet("/api/musees", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
     }
 };
 
