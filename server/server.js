@@ -4,7 +4,6 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 const router = express.Router();
-const port = 4000;
 const serverInfos = require("../serverInfos.json");
 
 app.use(bodyParser.urlencoded({ extended: true }, { limit: '50mb' }));
@@ -90,4 +89,4 @@ router.post('/mail/send', function(req, res) {
 
 app.use('/api', router);
 
-app.listen(port, () => console.log("Listening on port " + port));
+app.listen(serverInfos.serverPort, () => console.log("Listening on port " + serverInfos.serverPort));

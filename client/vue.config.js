@@ -1,15 +1,18 @@
-var url = require('../serverInfos.json').nodeJServer
+const serverInfos = require('../serverInfos.json');
+var nodeJServerUrl = serverInfos.nodeJServer;
+var clientPort = serverInfos.clientPort;
+var serverPort = serverInfos.serverPort;
 
 module.exports = {
   devServer: {
       proxy: {
           '/api': {
-            target: url,
+            target: nodeJServerUrl + serverPort,
             ws: true,
             changeOrigin: true
           }
         },
-    port: 3000,
+    port: clientPort,
     disableHostCheck: true
   }
 };

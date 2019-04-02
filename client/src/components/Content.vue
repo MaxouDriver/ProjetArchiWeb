@@ -1,7 +1,7 @@
 <template>
   <div id="content-container">
     <Filters :onFiltersUpdated="onFiltersUpdated"/>
-    <v-layout row wrap>
+    <v-layout row wrap style="height: 30vw;">
           <v-flex xs12 sm6>
               <DataSelector :selectedFilters="filters" 
               :zonesTouristiques="zonesTouristiques" 
@@ -154,5 +154,4 @@ export default {
 </script>
 
  <style>
-    #calendar{margin-right: 15vw; margin-left: 15vw;}
   </style>

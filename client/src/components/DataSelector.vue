@@ -1,17 +1,13 @@
 <template>
-  <div>
-    <v-data-table :headers="headers" :items="activities" class="elevation-1">
+  <div style="height: 100%;">
+    <v-data-table :headers="headers" :items="activities" class="elevation-1" style="height: 100%;">
         <template v-slot:items="props">
           <td>{{ props.item.name }}</td>
           <td class="text-xs-right">{{ props.item.cathegory }}</td>
         </template>
       </v-data-table>
-
-    <div class="headline text-xs-center pa-5">
-      
-    </div>
-    <v-card flat>
-      <v-bottom-nav :value="true" absolute color="transparent" >
+    <v-card flat style="position: relative;">
+      <v-bottom-nav :value="true" absolute color="transparent">
         <v-btn color="teal" flat value="recent" >
           <span>Morning</span>
           <v-icon>history</v-icon>
