@@ -33,7 +33,7 @@ function performPost(url, params, successCallback, failureCallback){
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(params)
         });

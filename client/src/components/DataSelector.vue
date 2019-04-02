@@ -22,6 +22,11 @@
           <span>Evening</span>
           <v-icon>place</v-icon>
         </v-btn>
+
+        <v-btn color="teal" flat value="nearby" >
+          <span>Night</span>
+          <v-icon>place</v-icon>
+        </v-btn>
       </v-bottom-nav>
     </v-card>
   </div>

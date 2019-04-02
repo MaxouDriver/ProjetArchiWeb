@@ -68,7 +68,7 @@ export default {
 
       date: new Date().toISOString().substr(0, 10),
       moment: undefined,
-      items: ['Morning', 'Afternoon', 'Evening'],
+      items: ['Morning', 'Afternoon', 'Evening', 'Night'],
 
 
       map: null,
@@ -259,8 +259,8 @@ export default {
         function(){
           alert("success");
         },
-        function(){
-          alert("failure");
+        function(err){
+          alert(err);
         }
       );
       this.dialog = false;
@@ -337,7 +337,7 @@ export default {
 
       return this.zonesTouristiquesLayers; 
     },
-    getMarkers(type, color, data){
+    getMarkers(type, color, data, isPlannifiable){
       var markers = L.markerClusterGroup();
       var thisRef = this;
 
@@ -352,7 +352,7 @@ export default {
             fillOpacity: 0.8
         };
 
-        var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, type, false, element.geometry), {
+        var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, type, isPlannifiable, element.geometry), {
             onEachFeature: thisRef.onEachFeature,
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, geojsonMarkerOptions);
@@ -366,70 +366,70 @@ export default {
     },
     getToiletsLayer(){
       if (this.toiletsLayer == undefined) {
-        this.toilersLayer = this.getMarkers("Toilets", "#00FF00", this.toilets);
+        this.toilersLayer = this.getMarkers("Toilets", "#00FF00", this.toilets, false);
       }
       
       return this.toilersLayer;
     },
     getMuseumsLayer(){
       if (this.museumsLayer == undefined) {
-        this.museumsLayer = this.getMarkers("Museums", "#00FF00", this.museums);
+        this.museumsLayer = this.getMarkers("Museums", "#00FF00", this.museums, true);
       }
       
       return this.museumsLayer;
     },
     getFrenchTraditionalRestaurantLayer(){
       if (this.frenchTraditionalRestaurantLayer == undefined) {
-        this.frenchTraditionalRestaurantLayer = this.getMarkers("FrenchTraditionalRestaurant", "#00FF00", this.frenchTraditionalRestaurant);
+        this.frenchTraditionalRestaurantLayer = this.getMarkers("FrenchTraditionalRestaurant", "#00FF00", this.frenchTraditionalRestaurant, true);
       }
       
       return this.frenchTraditionalRestaurantLayer;
     },
     getSatFastFoodLayer(){
       if (this.satFastFoodLayer == undefined) {
-        this.satFastFoodLayer = this.getMarkers("SatFastFoodLayer", "#00FF00", this.satFastFood);
+        this.satFastFoodLayer = this.getMarkers("SatFastFoodLayer", "#00FF00", this.satFastFood, true);
       }
       
       return this.satFastFoodLayer;
     },
     getStandingFastFoodLayer(){
       if (this.standingFastFoodLayer == undefined) {
-        this.standingFastFoodLayer = this.getMarkers("StandingFastFoodLayer", "#00FF00", this.standingFastFood);
+        this.standingFastFoodLayer = this.getMarkers("StandingFastFoodLayer", "#00FF00", this.standingFastFood, true);
       }
       
       return this.standingFastFoodLayer;
     },
     getBarCoffeeLayer(){
       if (this.barCoffeeLayer == undefined) {
-        this.barCoffeeLayer = this.getMarkers("BarAndCoffee", "#00FF00", this.barAndCoffee);
+        this.barCoffeeLayer = this.getMarkers("BarAndCoffee", "#00FF00", this.barAndCoffee, true);
       }
       
       return this.barCoffeeLayer;
     },
     getTeaLayer(){
       if (this.teaLayer == undefined) {
-        this.teaLayer = this.getMarkers("Tea", "#00FF00", this.tea);
+        this.teaLayer = this.getMarkers("Tea", "#00FF00", this.tea, true);
       }
       
       return this.teaLayer;
     },
     getArtGalleryLayer(){
       if (this.artGalleryLayer == undefined) {
-        this.artGalleryLayer = this.getMarkers("ArtGallery", "#00FF00", this.artGallery);
+        this.artGalleryLayer = this.getMarkers("ArtGallery", "#00FF00", this.artGallery, true);
       }
       
       return this.artGalleryLayer;
     },
     getLocalProductLayer(){
       if (this.localProductLayer == undefined) {
-        this.localProductLayer = this.getMarkers("LocalProduct", "#00FF00", this.localProduct);
+        this.localProductLayer = this.getMarkers("LocalProduct", "#00FF00", this.localProduct, true);
       }
       
       return this.localProductLayer;
     },
     getSouvenirLayer(){
       if (this.souvenirLayer == undefined) {
-        this.souvenirLayer = this.getMarkers("SouvenirShop", "#00FF00", this.souvenirShop);
+        this.souvenirLayer = this.getMarkers("SouvenirShop", "#00FF00", this.souvenirShop, true);
       }
       
       return this.souvenirLayer;
