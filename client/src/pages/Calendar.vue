@@ -5,18 +5,9 @@
           <v-sheet height="100%">
             <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
             <v-calendar ref="calendar" :now="today" :value="today" color="primary" type="week">
-              <!-- the events at the top (all-day) -->
-              <template v-slot:dayHeadere="{ date }">
-                <template v-for="event in eventsMap[date]">
-                  <!-- all day events don't have time -->
-                  <div v-if="!event.time" :key="event.id" class="my-event" @click="open(event)" v-html="event.title"></div>
-                </template>
-              </template>
-              <!-- the events at the bottom (timed) -->
               <template v-slot:dayBody="{ date, timeToY, minutesToPixels }">
                 <template v-for="event in eventsMap[date]">
-                  <!-- timed events -->
-                  <div v-if="event.time" :key="event.id" :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
+                  <div v-if="event.time" :key="event.id" :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px', backgroundColor: event.color}"
                     class="my-event with-time" @click="open(event)" v-html="event.title"></div>
                 </template>
               </template>
@@ -63,40 +54,56 @@ import DataManager from '../utils/DataManager.js'
           thisRef.events = [];
           var eventToAdd = {};
           var idForRender = 0;
+
+          var tempEvent = [];
         
           data.forEach(function(d){
             for (var date in d) {
               for (var moment in d[date]) {
                 for (var event in d[date][moment]) {
-                  var i = 0;
-                  for (var item in d[date][moment][event]) {
-                    i++;
-                  }
-                  var durationOfEvent = 360 / i;
                   eventToAdd.id = idForRender++;
-                  eventToAdd.duration = durationOfEvent;
                   eventToAdd.date = date;
-
-                  switch(moment){
-                    case "Morning":
-                      eventToAdd.time = '6:00';
-                      break;
-                    case "Afternoon":
-                      eventToAdd.time = '12:00';
-                      break;
-                    case "Evening":
-                      eventToAdd.time = '18:00';
-                      break;
-                    case "Night":
-                      eventToAdd.time = '00:00';
-                      break;
-                  }
-                  for (item in d[date][moment][event]) {
+                  
+                  for (var item in d[date][moment][event]) {
                     eventToAdd[item] = d[date][moment][event][item];
                   }
-                  thisRef.events.push(eventToAdd);
+                  tempEvent.push(eventToAdd);
                   eventToAdd = {};
                 }   
+
+                var nbOfEvent = tempEvent.length;
+                var startTime = undefined;
+                var i = 0;
+                var color = undefined;
+
+                switch(moment){
+                  case "Morning":
+                    startTime = 6;
+                    color = "#BBDEFB";
+                    break;
+                  case "Afternoon":
+                    startTime = 12;
+                    color = "#EF9A9A";
+                    break;
+                  case "Evening":
+                    startTime = 18;
+                    color = "#CE93D8";
+                    break;
+                  case "Night":
+                    startTime = 0;
+                    color = "#546E7A";
+                    break;
+                }
+
+                tempEvent.forEach(function(event){
+                  event.color = color;
+                  event.duration = 360 / nbOfEvent;
+                  event.time = startTime + (event.duration / 60 * i++) + ":00";
+                  thisRef.events.push(event);
+                });
+
+                tempEvent = [];
+
               }
             }   
           });
@@ -129,20 +136,16 @@ import DataManager from '../utils/DataManager.js'
     padding: 4vw;
   }
   .my-event {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  border-radius: 2px;
-  background-color: #1867c0;
-  color: #fff;
-  border: 1px solid #1867c0;
-  font-size: 12px;
-  padding: 3px;
-  cursor: pointer;
-  margin-bottom: 1px;
-  left: 4px;
-  margin-right: 8px;
-  position: relative;
+    border: 2px solid rgba(255, 255, 255, 1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    left: 4px;
+    padding: 8px;
+    position: relative;
 }
 .my-event.with-time {
   position: absolute;
