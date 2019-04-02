@@ -35,3 +35,9 @@ export default{
   }
 }
 </script>
+
+<style scoped>
+  #app{
+    padding: 4vw;
+  }
+</style>
