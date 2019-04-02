@@ -7,7 +7,7 @@ function performGet(url, queries, successCallback, failureCallback){
             query += k + "=" + queries[k];
         }
     }
-    
+
     var doGetAjax = async (url, query) => {
         const response = await fetch(queries != undefined ? url + query : url, {
             method: 'GET',
@@ -16,7 +16,7 @@ function performGet(url, queries, successCallback, failureCallback){
             }
         });
         const body = await response.json();
-    
+
         return body;
     };
 
@@ -38,7 +38,7 @@ function performPost(url, params, successCallback, failureCallback){
             body: JSON.stringify(params)
         });
         const body = await response.json();
-    
+
         return body;
     };
 
@@ -60,56 +60,56 @@ const DatabaseManager = {
         performGet("/api/zonesTouristiques", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
     getToilets(successCallback, failureCallback){
         performGet("/api/toilets", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
     getNews(successCallback, failureCallback){
         performGet("/api/topHeadlinesNews", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
     getFilters(successCallback, failureCallback){
         performGet("/api/filters", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
     getPlanning(user, successCallback, failureCallback){
         performGet("/api/planning", {user: user},
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
     getMuseums(successCallback, failureCallback){
         performGet("/api/musees", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
     getFrenchTraditionalRestaurant(successCallback, failureCallback){
         performGet("/api/shops/restaurant/frenchTraditionalRestaurant", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
       getSatFastFood(successCallback, failureCallback){
         performGet("/api/shops/restaurant/fastFood/sat", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
 
@@ -117,7 +117,7 @@ const DatabaseManager = {
         performGet("/api/shops/restaurant/fastFood/standing", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
 
@@ -125,7 +125,7 @@ const DatabaseManager = {
         performGet("/api/shops/beverage/barCoffee", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
 
@@ -133,7 +133,7 @@ const DatabaseManager = {
         performGet("/api/shops/beverage/tea", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
 
@@ -141,7 +141,7 @@ const DatabaseManager = {
         performGet("/api/shops/artGallery", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
 
@@ -149,7 +149,7 @@ const DatabaseManager = {
         performGet("/api/shops/localProduct", undefined,
         function(res){
             successCallback(res.data);
-        }, 
+        },
         failureCallback);
     },
 
@@ -160,6 +160,14 @@ const DatabaseManager = {
         }, 
         failureCallback);
     },
+
+    getWeatherCurrent(successCallback, failureCallback){
+       performGet("/api/weather/current", undefined,
+       function(res){
+           successCallback(res.data);
+       },
+       failureCallback);
+   }
 };
 
 export default DatabaseManager;
