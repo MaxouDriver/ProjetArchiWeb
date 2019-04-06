@@ -1,8 +1,8 @@
 <template>
   <div id="content-container">
     <Filters :onFiltersUpdated="onFiltersUpdated"/>
-    <v-layout row wrap style="height: 30vw;">
-          <v-flex xs12 sm6>
+    <v-layout row wrap fill-height :style="'min-height: ' + size + 'px;'">
+          <v-flex  md6 sm12 :style="'min-height: ' + size + 'px;'">
               <DataSelector :selectedFilters="filters" 
               :zonesTouristiques="zonesTouristiques" 
               :toilets="toilets" 
@@ -16,7 +16,7 @@
               :localProduct="localProduct"
               :souvenirShop="souvenirShop"/>
            </v-flex>
-           <v-flex xs12 sm6>
+           <v-flex  md6 sm12 :style="'min-height: ' + size + 'px; width: ' + size +'px !important;'">
               <Map :selectedFilters="filters" 
               :zonesTouristiques="zonesTouristiques" 
               :toilets="toilets" 
@@ -46,6 +46,8 @@ export default {
     Map,Filters,DataSelector
   },
   mounted(){
+    this.onResize();
+
     this.initZonesTouristiques();
     this.initToilets();
     this.initMuseums();
@@ -65,10 +67,15 @@ export default {
       tea: [],
       artGallery: [],
       localProduct: [],
-      souvenirShop: []
+      souvenirShop: [],
+
+      size: 0
     }
   },
   methods: {
+    onResize () {
+        this.size = window.innerWidth < 960 ? window.innerWidth  : window.innerWidth/2;
+    },
     onFiltersUpdated(filters){
       this.filters = filters;
     },
@@ -153,5 +160,5 @@ export default {
 }
 </script>
 
- <style>
+ <style scoped>
   </style>

@@ -1,35 +1,33 @@
 <template>
   <div id="leafletMapContainer">
     <div id="leafletMap"></div>
-    <v-layout row justify-center>
-      <v-dialog v-model="dialog" persistent max-width="600px">
-        <v-card>
-          <v-card-title>
-            <span class="headline">Add on planning</span>
-          </v-card-title>
-          <v-card-text>
-            <v-date-picker
-              v-model="date"
-              full-width
-              landscape
-              class="mt-3"
-            ></v-date-picker>
-            <br/>
-            <v-select
-              v-model="moment"
-              :items="items"
-              label="Outline style"
-              outline
-            ></v-select>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-            <v-btn color="blue darken-1" flat @click="addToPlanning()">Add on my planning</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-layout>
+    <v-dialog v-model="dialog" persistent max-width="600px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Add on planning</span>
+        </v-card-title>
+        <v-card-text>
+          <v-date-picker
+            v-model="date"
+            full-width
+            landscape
+            class="mt-3"
+          ></v-date-picker>
+          <br/>
+          <v-select
+            v-model="moment"
+            :items="items"
+            label="Outline style"
+            outline
+          ></v-select>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
+          <v-btn color="blue darken-1" flat @click="addToPlanning()">Add on my planning</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 

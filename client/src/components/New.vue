@@ -11,7 +11,7 @@
       <div class="card-media-body-top">
         <span class="subtle">{{date + " BY " + source}}</span>
       </div>
-      <span class="card-media-body-heading">{{title}}</span>
+      <p class="card-media-body-heading" style="overflow: hidden;">{{title}}</p>
       <div class="card-media-body-supporting-bottom">
         <span class="card-media-body-supporting-bottom-text subtle">{{description}}</span>
       </div>

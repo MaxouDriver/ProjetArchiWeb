@@ -1,7 +1,7 @@
 <template>
     <v-card>
-    <v-layout>
-      <v-flex>
+    <v-layout row wrap>
+      <v-flex md6 sm12>
         <v-card-text>
           <v-treeview v-model="tree" :items="items" activatable active-class="grey lighten-4 indigo--text" selected-color="indigo"
             open-on-click selectable expand-icon="navigate_next" on-icon="lens" off-icon="panorama_fish_eye">
@@ -9,9 +9,7 @@
         </v-card-text>
       </v-flex>
 
-      <v-divider vertical></v-divider>
-
-      <v-flex xs12 md6>
+      <v-flex md6 sm12>
         <v-card-text>
           <div v-if="selectedItems.length === 0" key="title" class="title font-weight-light grey--text pa-3 text-xs-center">
             Select filters
