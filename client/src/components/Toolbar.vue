@@ -1,19 +1,31 @@
 <template>
-  <v-toolbar class="white">
-          <v-toolbar-title v-text="title">
-          </v-toolbar-title>
+  <div>
+    <v-navigation-drawer v-model="drawer" absolute temporary class="white">
+        <v-list two-line>
+            <template v-for="(item, index) in menu">
+              <v-list-tile :key="item.title" avatar ripple :to="item.link" @click="drawer = false">
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <v-divider v-if="index + 1 < menu.length" :key="index"></v-divider>
+            </template>
+          </v-list>
+      </v-navigation-drawer>      
+      <v-toolbar class="white" fixed app>
+        <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-title v-text="title"></v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+          <v-btn
+            v-for="item in menu"
+            :key="item.id"
+            :to="item.link"
+            flat
+          >{{ item.title }}</v-btn>
+        </v-toolbar-items>
 
-          <v-spacer></v-spacer>
-          <v-toolbar-items class="hidden-sm-and-down">
-            <v-btn
-              v-for="item in menu"
-              :key="item.id"
-              :to="item.link"
-              flat
-            >{{ item.title }}</v-btn>
-          </v-toolbar-items>
-
-          <v-menu>
+        <v-menu>
             <v-btn slot="activator" icon color="success">
               <v-icon>face</v-icon>
             </v-btn>
@@ -27,7 +39,8 @@
               </v-list-tile>
             </v-list>
         </v-menu>
-  </v-toolbar>
+      </v-toolbar>   
+  </div>
 </template>
 
 <script>
@@ -37,6 +50,8 @@ export default {
   name: 'Toolbar',
   data () {
       return {
+          drawer: false,
+
           title: "ParisGo",
           isAuthenticated: false,
           img: "https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png",
