@@ -54,7 +54,13 @@ const DatabaseManager = {
         performPost("/api/mail/send", params, successCallback, failureCallback);
     },
     saveOnPlanning(params, successCallback, failureCallback){
-        performPost("/api/planning/add", params, successCallback, failureCallback);
+        performPost("/api/planning/add", params, function(data){
+            if (data.success == true) {
+                successCallback(data.message);
+            }else{
+                failureCallback(data.message);
+            }
+        }, failureCallback);
     },
     getZonesTouristiques(successCallback, failureCallback){
         performGet("/api/zonesTouristiques", undefined,

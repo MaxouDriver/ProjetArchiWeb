@@ -255,7 +255,7 @@ export default {
           moment: this.moment
         },
         function(){
-          alert("success");
+          //Nothing everything good
         },
         function(err){
           alert(err);
@@ -301,7 +301,7 @@ export default {
               thisRef.dialog = true;
           });
 
-          button = $("<button name='" + feature.properties.title + "' type='" + feature.properties.type + "' class='addToPlanning'>Click me</button>");
+          button = $("<button name='" + feature.properties.title + "' type='" + feature.properties.type + "' class='addToPlanning'>Add to planning</button>");
         }else{
           container.on('click', '.connection', function() {
               thisRef.$router.push("/login");

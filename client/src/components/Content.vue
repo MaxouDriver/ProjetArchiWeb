@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     onResize () {
-        this.size = window.innerWidth < 960 ? window.innerWidth  : window.innerWidth/2;
+        this.size = window.innerWidth < 960 ? window.innerWidth/2  : window.innerWidth/4;
     },
     onFiltersUpdated(filters){
       this.filters = filters;

@@ -5,12 +5,25 @@ exports.saveOnPlanning = function(req, res){
 
     var ref = db.ref(req.body.user + "/planning/" + req.body.date + "/" + req.body.moment + "/");
 
-    ref.push().set({
-        title: req.body.name, 
-        type: req.body.type
+    ref.once('value', function(snapshot) {
+        var length = 0;
+        snapshot.forEach(function(childSnapshot) {
+            if (childSnapshot.val().title == req.body.name){
+                res.json({success: false, message: "You already planned this event"});
+                return;
+            }
+            length++;
+        });
+        if(length < 6){
+            ref.push().set({
+                title: req.body.name, 
+                type: req.body.type
+            });
+            res.json({success: true, message: "Successfully added"});
+        }else{
+            res.json({success: false, message: "Too many element at the moment of the selection"});
+        }
     });
-
-    res.json({success: true, message: "Yes"});
 };
 
 exports.getPlanning = function(req, res){
