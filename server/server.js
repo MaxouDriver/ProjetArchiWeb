@@ -46,6 +46,7 @@ shop = require('./routes/commerces.js');
 news = require('./routes/news.js');
 planning = require('./routes/planning.js');
 musees = require('./routes/musees.js');
+events = require('./routes/evenements.js');
 
 router.route('/filters').get(filters.getFilters);
 
@@ -71,6 +72,8 @@ router.route('/topHeadlinesNews').get(news.getTopHeadlinesNews);
 
 router.route('/planning/add').post(planning.saveOnPlanning);
 router.route('/planning').get(planning.getPlanning);
+
+router.route('/events').get(events.getEvents);
 
 router.get('/', function(req, res) {
   res.json({ message: 'Nothing here!'});
