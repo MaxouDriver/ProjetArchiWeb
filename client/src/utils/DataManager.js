@@ -111,69 +111,69 @@ const DatabaseManager = {
         },
         failureCallback);
     },
-      getSatFastFood(successCallback, failureCallback){
+    getSatFastFood(successCallback, failureCallback){
         performGet("/api/shops/restaurant/fastFood/sat", undefined,
         function(res){
             successCallback(res.data);
         },
         failureCallback);
     },
-
-      getStandingFastFood(successCallback, failureCallback){
+    getStandingFastFood(successCallback, failureCallback){
         performGet("/api/shops/restaurant/fastFood/standing", undefined,
         function(res){
             successCallback(res.data);
         },
         failureCallback);
     },
-
-      getBarAndCoffee(successCallback, failureCallback){
+    getBarAndCoffee(successCallback, failureCallback){
         performGet("/api/shops/beverage/barCoffee", undefined,
         function(res){
             successCallback(res.data);
         },
         failureCallback);
     },
-
-      getTea(successCallback, failureCallback){
+    getTea(successCallback, failureCallback){
         performGet("/api/shops/beverage/tea", undefined,
         function(res){
             successCallback(res.data);
         },
         failureCallback);
     },
-
-      getArtGallery(successCallback, failureCallback){
+    getArtGallery(successCallback, failureCallback){
         performGet("/api/shops/artGallery", undefined,
         function(res){
             successCallback(res.data);
         },
         failureCallback);
     },
-
-      getLocalProduct(successCallback, failureCallback){
+    getLocalProduct(successCallback, failureCallback){
         performGet("/api/shops/localProduct", undefined,
         function(res){
             successCallback(res.data);
         },
         failureCallback);
     },
-
-     getSouvenirShop(successCallback, failureCallback){
+    getSouvenirShop(successCallback, failureCallback){
         performGet("/api/shops/souvenir", undefined,
         function(res){
             successCallback(res.data);
         }, 
         failureCallback);
     },
-
     getWeatherCurrent(successCallback, failureCallback){
        performGet("/api/weather/current", undefined,
        function(res){
            successCallback(res.data);
        },
        failureCallback);
-   }
+    },
+    getWeatherByDate(date, successCallback, failureCallback){
+        performGet("/api/weather", {date: date},
+        function(res){
+            successCallback(res.data);
+        },
+        failureCallback);
+    }
 };
 
 export default DatabaseManager;

@@ -8,24 +8,20 @@
       </v-data-table>
     <v-card flat style="position: relative;">
       <v-bottom-nav :value="true" absolute color="transparent">
-        <v-btn color="teal" flat value="recent" >
+        <v-btn color="teal" flat value="morning" >
           <span>Morning</span>
-          <v-icon>history</v-icon>
         </v-btn>
 
-        <v-btn color="teal" flat value="favorites"  >
+        <v-btn color="teal" flat value="afternoon"  >
           <span>Afternoon</span>
-          <v-icon>favorite</v-icon>
         </v-btn>
 
-        <v-btn color="teal" flat value="nearby" >
+        <v-btn color="teal" flat value="evening" >
           <span>Evening</span>
-          <v-icon>place</v-icon>
         </v-btn>
 
-        <v-btn color="teal" flat value="nearby" >
+        <v-btn color="teal" flat value="night" >
           <span>Night</span>
-          <v-icon>place</v-icon>
         </v-btn>
       </v-bottom-nav>
     </v-card>

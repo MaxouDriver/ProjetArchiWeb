@@ -1,5 +1,14 @@
 <template>
   <div id="content-container">
+    <v-menu ref="menu1" v-model="menu" :close-on-content-click="false" :nudge-right="40"
+      lazy transition="scale-transition" offset-y full-width max-width="290px" min-width="290px">
+      <template v-slot:activator="{ on }">
+        <v-text-field v-model="dateFormatted" label="Date" hint="MM/DD/YYYY format"
+          persistent-hint prepend-icon="event" @blur="date = parseDate(dateFormatted)" v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
+    </v-menu>
     <Filters :onFiltersUpdated="onFiltersUpdated"/>
     <v-layout row wrap fill-height :style="'min-height: ' + size + 'px;'">
           <v-flex  md6 sm12 :style="'min-height: ' + size + 'px;'">
@@ -69,12 +78,58 @@ export default {
       localProduct: [],
       souvenirShop: [],
 
-      size: 0
+      size: 0,
+
+
+      date: new Date().toISOString().substr(0, 10),
+      dateFormatted: undefined,
+      menu: false
+    }
+  },
+  computed: {
+    computedDateFormatted () {
+      return this.formatDate(this.date)
+    }
+  },
+  watch: {
+    date () {
+      this.dateFormatted = this.formatDate(this.date)
+      if (this.dateFormatted != undefined) {
+        DataManager.getWeatherByDate(this.formatDateForServer(this.date), function(data){
+          if (data != undefined) {
+            //Do something
+          }else{
+            //No weather prevision
+          }
+        },
+        function(){
+          alert("Opps something gone wrong");
+        });
+      }
     }
   },
   methods: {
+    formatDate (date) {
+      if (!date) return null
+
+      const [year, month, day] = date.split('-')
+      return `${month}/${day}/${year}`
+    },
+    formatDateForServer (date) {
+      if (!date) return null
+
+      const [year, month, day] = date.split('-')
+      alert(year + ', ' +  month + ', ' + day);
+      return `${day}.${month}.${year}`
+    },
+    parseDate (date) {
+      if (!date) return null
+
+      const [month, day, year] = date.split('/')
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
     onResize () {
-        this.size = window.innerWidth < 960 ? window.innerWidth/2  : window.innerWidth/4;
+        this.size = window.innerWidth < 960 ? window.innerWidth  : window.innerWidth/4;
     },
     onFiltersUpdated(filters){
       this.filters = filters;
