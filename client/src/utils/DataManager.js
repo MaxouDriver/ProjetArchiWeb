@@ -1,6 +1,5 @@
 function performGet(url, queries, successCallback, failureCallback){
     var query = "";
-
     if (queries != undefined) {
         for (var k in queries){
             if (query.length == 0) query += "?";
@@ -172,6 +171,329 @@ const DatabaseManager = {
         function(res){
             successCallback(res.data);
         },
+        failureCallback);
+    },
+    getBalade (successCallback, failureCallback){
+        performGet("/api/events/animations/balade", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getAtelierCours(successCallback, failureCallback){
+        performGet("/api/events/animations/atelierCours", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getConferenceDebat(successCallback, failureCallback){
+        performGet("/api/events/animations/conferenceDebat", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getStage(successCallback, failureCallback){
+        performGet("/api/events/animations/stage", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getVisiteGuidee(successCallback, failureCallback){
+        performGet("/api/events/animations/visiteGuidee", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getLoisirsJeux(successCallback, failureCallback){
+        performGet("/api/events/animations/loisirsJeux", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getLectureRencontre(successCallback, failureCallback){
+        performGet("/api/events/animations/lectureRencontre", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getAutreAnimation(successCallback, failureCallback){
+        performGet("/api/events/animations/autre", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    
+    getHumour(successCallback, failureCallback){
+        performGet("/api/events/spectacles/humour", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getDanse (successCallback, failureCallback){
+        performGet("/api/shops/souvenir", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getTheatre(successCallback, failureCallback){
+        performGet("/api/events/spectacles/theatre", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getProjection(successCallback, failureCallback){
+        performGet("/api/events/spectacles/projection", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    
+    getCirqueArtDeLaRue(successCallback, failureCallback){
+        performGet("/api/events/spectacles/cirque", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getJeunePublic(successCallback, failureCallback){
+        performGet("/api/events/spectacles/jeune", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getOperaMusical(successCallback, failureCallback){
+        performGet("/api/events/spectacles/opera", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getAutreSpectacle(successCallback, failureCallback){
+        performGet("/api/events/spectacles/autre", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getPhotographie(successCallback, failureCallback){
+        performGet("/api/events/expositions/photographie", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getBeauxArts(successCallback, failureCallback){
+        performGet("/api/events/expositions/beauxArts", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getArtContemporain(successCallback, failureCallback){
+        performGet("/api/events/expositions/artContemporain", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getStreetArt(successCallback, failureCallback){
+        performGet("/api/events/expositions/streetArt", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getHistoireCivilisations(successCallback, failureCallback){
+        performGet("/api/events/expositions/histoireCivilisations", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getIllustrationBD(successCallback, failureCallback){
+        performGet("/api/events/expositions/illustration", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getAutreExpo(successCallback, failureCallback){
+        performGet("/api/events/expositions/autre", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getClassique(successCallback, failureCallback){
+        performGet("/api/events/concerts/classique", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getFolk(successCallback, failureCallback){
+        performGet("/api/events/concerts/folk", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    
+    getHipHop(successCallback, failureCallback){
+        performGet("/api/events/concerts/hipHop", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getReggae(successCallback, failureCallback){
+        performGet("/api/events/concerts/reggae", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getChansonFrancaise(successCallback, failureCallback){
+        performGet("/api/events/concerts/chansonFrancaise", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getPopVariete(successCallback, failureCallback){
+        performGet("/api/events/concerts/pop", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getRock(successCallback, failureCallback){
+        performGet("/api/events/concerts/rock", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getJazz(successCallback, failureCallback){
+        performGet("/api/events/concerts/jazz", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getMusiquesDuMonde(successCallback, failureCallback){
+        performGet("/api/events/concerts/musiqueDuMonde", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    
+    getElectronique(successCallback, failureCallback){
+        performGet("/api/events/concerts/electronique", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getAutreConcert(successCallback, failureCallback){
+        performGet("/api/events/concerts/autre", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getBrocanteMarche(successCallback, failureCallback){
+        performGet("/api/events/brocante", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getEvenementSportif(successCallback, failureCallback){
+        performGet("/api/events/sport", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getFestivalCycle(successCallback, failureCallback){
+        performGet("/api/events/festival", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getSoireeBal(successCallback, failureCallback){
+        performGet("/api/events/fete", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+        
+    getSalon(successCallback, failureCallback){
+        performGet("/api/events/salon", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
+        failureCallback);
+    },
+    
+    getAutreEvenement(successCallback, failureCallback){
+        performGet("/api/events/autre", undefined,
+        function(res){
+            successCallback(res.data);
+        }, 
         failureCallback);
     }
 };

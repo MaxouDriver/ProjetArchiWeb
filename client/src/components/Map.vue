@@ -52,7 +52,49 @@ export default {
     tea: Array,
     artGallery: Array,
     localProduct: Array,
-    souvenirShop: Array
+    souvenirShop: Array,
+
+
+    balade : Array,
+    atelierCours: Array,
+    conferenceDebat: Array,
+    stage: Array,
+    visiteGuidee: Array,
+    loisirsJeux: Array,
+    lectureRencontre: Array,
+    autreAnimation: Array,
+    humour: Array,
+    danse: Array,
+    theatre: Array,
+    projection: Array,
+    cirqueArtDeLaRue: Array,
+    jeunePublic: Array,
+    operaMusical: Array,
+    autreSpectacle: Array,
+    photographie: Array,
+    beauxArts: Array,
+    artContemporain: Array,
+    streetArt: Array,
+    histoireCivilisations: Array,
+    illustrationBD: Array,
+    autreExpo: Array,
+    classique: Array,
+    folk: Array,
+    hipHop: Array,
+    reggae: Array,
+    chansonFrancaise: Array,
+    popVariete: Array,
+    rock: Array,
+    jazz: Array,
+    musiquesDuMonde: Array,
+    electronique: Array,
+    autreConcert: Array,
+    brocanteMarche: Array,
+    evenementSportif: Array,
+    festivalCycle: Array,
+    soireeBal: Array, 
+    salon: Array,
+    autreEvenement: Array
   },
   watch: {
     selectedFilters() {
@@ -86,6 +128,46 @@ export default {
       localProductLayer: undefined,
       souvenirLayer: undefined,
 
+      brocanteLayer: undefined,
+      evenementSportifLayer: undefined,
+      festivalLayer: undefined,
+      feteLayer: undefined,
+      salonLayer: undefined,
+      autreEvenementLayer: undefined,
+      baladeLayer: undefined,
+      atelierLayer: undefined,
+      conferenceLayer: undefined,
+      lectureLayer: undefined,
+      stageLayer: undefined,
+      visiteGuideeLayer: undefined,
+      loisirLayer: undefined,
+      autreAnimationLayer: undefined,
+      humourLayer: undefined,
+      danseLayer: undefined,
+      theatreLayer: undefined,
+      projectionLayer: undefined,
+      cirqueLayer: undefined,
+      jeuneLayer: undefined,
+      operaLayer: undefined,
+      autreSpectacleLayer: undefined,
+      photographieLayer: undefined,
+      beauxArtsLayer: undefined,
+      artContemporainLayer: undefined,
+      streetArtLayer: undefined,
+      histoireLayer: undefined,
+      illustrationLayer: undefined,
+      autreExpoLayer: undefined,
+      classiqueLayer: undefined,
+      chansonFrancaiseLayer: undefined,
+      popLayer: undefined,
+      rockLayer: undefined,
+      jazzLayer: undefined,
+      musiqueDuMondeLayer: undefined,
+      electroniqueLayer: undefined,
+      folkLayer: undefined,
+      hipHopLayer: undefined,
+      reggaeLayer: undefined,
+      autreConcertLayer: undefined,
 
       dialog: false,
       currentSelectedElementName: "",
@@ -102,11 +184,23 @@ export default {
       var fastFoodCat = false;
       var beverageCat = false;
 
+      var eventsCat = false;
+      var animationsCat = false;
+      var spectaclesCat = false;
+      var expositionsCat = false;
+      var concertsCat = false;
+
       this.selectedFilters.forEach(function(activity){
             shopCat = false;
             restaurantCat = false;
             fastFoodCat = false;
             beverageCat = false;
+
+            eventsCat = false;
+            animationsCat = false;
+            spectaclesCat = false;
+            expositionsCat = false;
+            concertsCat = false;
 
             switch(activity.name){
 
@@ -186,7 +280,260 @@ export default {
                 result.push(thisRef.getSouvenirLayer());
                 
                 break;
+                /* falls through */
+              case "Events":
+                eventsCat = true;
+                animationsCat = true;
+                spectaclesCat = true;
+                expositionsCat = true;
+                concertsCat = true;
+              /* falls through */
+              case "Brocante / Market":
+                result.push(thisRef.getBrocanteLayer());
+                if (eventsCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Sport":
+                result.push(thisRef.getEvenementSportifLayer());
+                if (eventsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Festival / Cycle":
+                result.push(thisRef.getFestivalLayer());
+                if (eventsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Party / Parade":
+                result.push(thisRef.getFeteLayer());
+                if (eventsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Salon":
+                result.push(thisRef.getSalonLayer());
+                if (eventsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Other":
+                result.push(thisRef.getAutreEvenementLayer());
+                break;
+
+
+              /* falls through */
+              case "Animations":
+                animationsCat = true;
+              /* falls through */
+              case "Walk":
+                result.push(thisRef.getBaladeLayer());
+                if (animationsCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Workshop, Course":
+                result.push(thisRef.getAtelierLayer());
+                if (animationsCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Conference / Debate":
+                result.push(thisRef.getConferenceLayer());
+                if (animationsCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Reading / Meeting":
+                result.push(thisRef.getLectureLayer());
+                if (animationsCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Traineeship":
+                result.push(thisRef.getStageLayer());
+                if (animationsCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Guided tour":
+                result.push(thisRef.getVisiteGuideeLayer());
+                if (animationsCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Hobbies / Games":
+                result.push(thisRef.getLoisirLayer());
+                if (animationsCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Other animation":
+                result.push(thisRef.getAutreAnimationLayer());
+                break;
                 
+              /* falls through */
+              case "Shows":
+                spectaclesCat = true;
+              /* falls through */
+              case "Humor":
+                result.push(thisRef.getHumourLayer());
+                if (spectaclesCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Dance":
+                result.push(thisRef.getDanseLayer());
+                if (spectaclesCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Theater":
+                result.push(thisRef.getTheatreLayer());
+                if (spectaclesCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Projection":
+                result.push(thisRef.getProjectionLayer());
+                if (spectaclesCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Circus / Street Art":
+                result.push(thisRef.getCirqueLayer());
+                if (spectaclesCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Young audience":
+                result.push(thisRef.getJeuneLayer());
+                if (spectaclesCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Opera / Musical":
+               result.push(thisRef.getOperaLayer());
+                if (spectaclesCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Other show":
+                result.push(thisRef.getAutreSpectacleLayer());
+                break;
+
+              /* falls through */
+              case "Expositions":
+                expositionsCat = true;
+              /* falls through */
+              case "Photography":
+                result.push(thisRef.getPhotographieLayer());
+                if (expositionsCat != true){
+                  break;
+                }
+              /* falls through */
+              case "Beaux-Arts":
+                result.push(thisRef.getBeauxArtsLayer());
+                if (expositionsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Contemporary art":
+                result.push(thisRef.getArtContemporainLayer());
+                if (expositionsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Street-art":
+                result.push(thisRef.getStreetArtLayer());
+                if (expositionsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "History / Civilizations":
+                result.push(thisRef.getHistoireLayer());
+                if (expositionsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Illustration / comic":
+                result.push(thisRef.getIllustrationLayer());
+                if (expositionsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Other expositions":
+                result.push(thisRef.getAutreExpoLayer());
+                break;
+
+              /* falls through */
+              case "Concerts":
+                concertsCat = true;
+              /* falls through */
+              case "Classical":
+                result.push(thisRef.getClassiqueLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "French song":
+                result.push(thisRef.getChansonFrancaiseLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Pop / Variety":
+                result.push(thisRef.getPopLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Rock":
+                result.push(thisRef.getRockLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Jazz":
+                result.push(thisRef.getJazzLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "World music":
+                result.push(thisRef.getMusiqueDuMondeLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Electronic":
+                result.push(thisRef.getElectroniqueLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Folk":
+                result.push(thisRef.getFolkLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Hip-Hop":
+                result.push(thisRef.getHipHopLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Reggae":
+                result.push(thisRef.getReggaeLayer());
+                if (concertsCat != true){
+                  break;
+                }
+                /* falls through */
+              case "Other concert":
+                result.push(thisRef.getAutreConcertLayer());
+                break;
             }
       });
 
@@ -350,14 +697,16 @@ export default {
             fillOpacity: 0.8
         };
 
-        var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, type, isPlannifiable, element.geometry), {
-            onEachFeature: thisRef.onEachFeature,
-            pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
-            }
-        });
+        if (element.geometry != undefined) {
+          var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, type, isPlannifiable, element.geometry), {
+              onEachFeature: thisRef.onEachFeature,
+              pointToLayer: function (feature, latlng) {
+                  return L.circleMarker(latlng, geojsonMarkerOptions);
+              }
+          });
 
-        markers.addLayer(marker);
+          markers.addLayer(marker);
+        }
 
       });
       return markers;
@@ -431,6 +780,286 @@ export default {
       }
       
       return this.souvenirLayer;
+    },
+    getBrocanteLayer(){
+      if (this.brocanteLayer == undefined) {
+        this.brocanteLayer = this.getMarkers("Brocante / Market", "#00FF00", this.brocanteMarche, true);
+      }
+      
+      return this.brocanteLayer;
+    },
+    getEvenementSportifLayer(){
+      if (this.evenementSportifLayer == undefined) {
+        this.evenementSportifLayer = this.getMarkers("Sport", "#00FF00", this.evenementSportif, true);
+      }
+      
+      return this.evenementSportifLayer;
+    },
+    getFestivalLayer(){
+      if (this.festivalLayer == undefined) {
+        this.festivalLayer = this.getMarkers("FestivalLayer", "#00FF00", this.festivalCycle, true);
+      }
+      
+      return this.festivalLayer;
+    },
+    getFeteLayer(){
+      if (this.feteLayer == undefined) {
+        this.feteLayer = this.getMarkers("Party / Parade", "#00FF00", this.soireeBal, true);
+      }
+      
+      return this.feteLayer;
+    },
+    getSalonLayer(){
+      if (this.salonLayer == undefined) {
+        this.salonLayer = this.getMarkers("SalonLayer", "#00FF00", this.salon, true);
+      }
+      
+      return this.salonLayer;
+    },
+    getAutreEvenementLayer(){
+      if (this.autreEvenementLayer == undefined) {
+        this.autreEvenementLayer = this.getMarkers("Other Event", "#00FF00", this.autreEvenement, true);
+      }
+      
+      return this.autreEvenementLayer;
+    },
+    getBaladeLayer(){
+      if (this.baladeLayer == undefined) {
+        this.baladeLayer = this.getMarkers("Walk", "#00FF00", this.balade, true);
+      }
+      
+      return this.baladeLayer;
+    },
+    getAtelierLayer(){
+       if (this.atelierLayer == undefined) {
+        this.atelierLayer = this.getMarkers("Workshop, Course", "#00FF00", this.atelierCours, true);
+      }
+      
+      return this.atelierLayer;
+    },
+    getConferenceLayer(){
+       if (this.conferenceLayer == undefined) {
+        this.conferenceLayer = this.getMarkers("Conference / Debate", "#00FF00", this.conferenceDebat, true);
+      }
+      
+      return this.conferenceLayer;
+    },
+    getLectureLayer(){
+       if (this.lectureLayer == undefined) {
+        this.lectureLayer = this.getMarkers("Reading / Meeting", "#00FF00", this.lectureRencontre, true);
+      }
+      
+      return this.lectureLayer;
+    },
+    getStageLayer(){
+       if (this.stageLayer == undefined) {
+        this.stageLayer = this.getMarkers("Traineeship", "#00FF00", this.stage, true);
+      }
+      
+      return this.stageLayer;
+    },
+    getVisiteGuideeLayer(){
+       if (this.visiteGuideeLayer == undefined) {
+        this.visiteGuideeLayer = this.getMarkers("Guided tour", "#00FF00", this.visiteGuidee, true);
+      }
+      
+      return this.visiteGuideeLayer;
+    },
+    getLoisirLayer(){
+       if (this.loisirLayer == undefined) {
+        this.loisirLayer = this.getMarkers("Hobbies / Games", "#00FF00", this.loisirsJeux, true);
+      }
+      
+      return this.loisirLayer;
+    },
+    getAutreAnimationLayer(){
+       if (this.autreAnimationLayer == undefined) {
+        this.autreAnimationLayer = this.getMarkers("Other animation", "#00FF00", this.autreAnimation, true);
+      }
+      
+      return this.autreAnimationLayer;
+    },
+    getHumourLayer(){
+       if (this.humourLayer == undefined) {
+        this.humourLayer = this.getMarkers("Humor", "#00FF00", this.humour, true);
+      }
+      
+      return this.humourLayer;
+    },
+    getDanseLayer(){
+       if (this.danseLayer == undefined) {
+        this.danseLayer = this.getMarkers("Dance", "#00FF00", this.danse, true);
+      }
+      
+      return this.danseLayer;
+    },
+    getTheatreLayer(){
+       if (this.theatreLayer == undefined) {
+        this.theatreLayer = this.getMarkers("Theater", "#00FF00", this.theatre, true);
+      }
+      
+      return this.theatreLayer;
+    },
+    getProjectionLayer(){
+       if (this.projectionLayer == undefined) {
+        this.projectionLayer = this.getMarkers("ProjectionLayer", "#00FF00", this.projection, true);
+      }
+      
+      return this.projectionLayer;
+    },
+    getCirqueLayer(){
+       if (this.cirqueLayer == undefined) {
+        this.cirqueLayer = this.getMarkers("Circus / Street Art", "#00FF00", this.cirqueArtDeLaRue, true);
+      }
+      
+      return this.cirqueLayer;
+    },
+    getJeuneLayer(){
+       if (this.jeuneLayer == undefined) {
+        this.jeuneLayer = this.getMarkers("Young audience", "#00FF00", this.jeunePublic, true);
+      }
+      
+      return this.jeuneLayer;
+    },
+    getOperaLayer(){
+       if (this.operaLayer == undefined) {
+        this.operaLayer = this.getMarkers("Opera / Musical", "#00FF00", this.operaMusical, true);
+      }
+      
+      return this.operaLayer;
+    },
+    getAutreSpectacleLayer(){
+       if (this.autreSpectacleLayer == undefined) {
+        this.autreSpectacleLayer = this.getMarkers("Other show", "#00FF00", this.autreSpectacle, true);
+      }
+      
+      return this.autreSpectacleLayer;
+    },
+    getPhotographieLayer(){
+       if (this.photographieLayer == undefined) {
+        this.photographieLayer = this.getMarkers("Photography", "#00FF00", this.photographie, true);
+      }
+      
+      return this.photographieLayer;
+    },
+    getBeauxArtsLayer(){
+       if (this.beauxArtsLayer == undefined) {
+        this.beauxArtsLayer = this.getMarkers("BeauxArtsLayer", "#00FF00", this.beauxArts, true);
+      }
+      
+      return this.beauxArtsLayer;
+    },
+    getArtContemporainLayer(){
+       if (this.artContemporainLayer == undefined) {
+        this.artContemporainLayer = this.getMarkers("Contemporary art", "#00FF00", this.artContemporain, true);
+      }
+      
+      return this.artContemporainLayer;
+    },
+    getStreetArtLayer(){
+       if (this.streetArtLayer == undefined) {
+        this.streetArtLayer = this.getMarkers("StreetArtLayer", "#00FF00", this.streetArt, true);
+      }
+      
+      return this.streetArtLayer;
+    },
+    getHistoireLayer(){
+       if (this.histoireLayer == undefined) {
+        this.histoireLayer = this.getMarkers("History / Civilizations", "#00FF00", this.histoireCivilisations, true);
+      }
+      
+      return this.histoireLayer;
+    },
+    getIllustrationLayer(){
+       if (this.illustrationLayer == undefined) {
+        this.illustrationLayer = this.getMarkers("Illustration / comic", "#00FF00", this.illustrationBD, true);
+      }
+      
+      return this.illustrationLayer;
+    },
+    getAutreExpoLayer(){
+       if (this.autreExpoLayer == undefined) {
+        this.autreExpoLayer = this.getMarkers("Other expositions", "#00FF00", this.autreExpo, true);
+      }
+      
+      return this.autreExpoLayer;
+    },
+    getClassiqueLayer(){
+       if (this.classiqueLayer == undefined) {
+        this.classiqueLayer = this.getMarkers("Classical", "#00FF00", this.classique, true);
+      }
+      
+      return this.classiqueLayer;
+    },
+    getChansonFrancaiseLayer(){
+       if (this.chansonFrancaiseLayer == undefined) {
+        this.chansonFrancaiseLayer = this.getMarkers("French song", "#00FF00", this.chansonFrancaise, true);
+      }
+      
+      return this.chansonFrancaiseLayer;
+    },
+    getPopLayer(){
+       if (this.popLayer == undefined) {
+        this.popLayer = this.getMarkers("Pop / Variety", "#00FF00", this.popVariete, true);
+      }
+      
+      return this.popLayer;
+    },
+    getRockLayer(){
+       if (this.rockLayer == undefined) {
+        this.rockLayer = this.getMarkers("RockLayer", "#00FF00", this.rock, true);
+      }
+      
+      return this.rockLayer;
+    },
+    getJazzLayer(){
+       if (this.jazzLayer == undefined) {
+        this.jazzLayer = this.getMarkers("JazzLayer", "#00FF00", this.jazz, true);
+      }
+      
+      return this.jazzLayer;
+    },
+    getMusiqueDuMondeLayer(){
+      if (this.musiqueDuMondeLayer == undefined) {
+        this.musiqueDuMondeLayer = this.getMarkers("World music", "#00FF00", this.musiquesDuMonde, true);
+      }
+      
+      return this.musiqueDuMondeLayer;
+    },
+    getElectroniqueLayer(){
+      if (this.electroniqueLayer == undefined) {
+        this.electroniqueLayer = this.getMarkers("Electronic", "#00FF00", this.electronique, true);
+      }
+      
+      return this.electroniqueLayer;
+    },
+    getFolkLayer(){
+      if (this.folkLayer == undefined) {
+        this.folkLayer = this.getMarkers("FolkLayer", "#00FF00", this.folk, true);
+      }
+      
+      return this.folkLayer;
+    },
+    getHipHopLayer(){
+      if (this.hipHopLayer == undefined) {
+        this.hipHopLayer = this.getMarkers("HipHopLayer", "#00FF00", this.hipHop, true);
+      }
+      
+      return this.hipHopLayer;
+    },
+    getReggaeLayer() {
+      if (this.reggaeLayer == undefined) {
+        this.reggaeLayer = this.getMarkers("ReggaeLayer", "#00FF00", this.reggae, true);
+      }
+      
+      return this.reggaeLayer;
+    },
+    getAutreConcertLayer(){
+      if (this.autreConcertLayer == undefined) {
+        this.autreConcertLayer = this.getMarkers("Other concert", "#00FF00", this.autreConcert, true);
+      }
+      
+      return this.autreConcertLayer;
     }
   }
 }

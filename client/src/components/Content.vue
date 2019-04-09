@@ -23,7 +23,48 @@
               :tea="tea"
               :artGallery="artGallery"
               :localProduct="localProduct"
-              :souvenirShop="souvenirShop"/>
+              :souvenirShop="souvenirShop"
+              
+              :balade="balade"
+              :atelierCours="atelierCours"
+              :conferenceDebat="conferenceDebat"
+              :stage="stage"
+              :visiteGuidee="visiteGuidee"
+              :loisirsJeux="loisirsJeux"
+              :lectureRencontre="lectureRencontre"
+              :autreAnimation="autreAnimation"
+              :humour="humour"
+              :danse="danse"
+              :theatre="theatre"
+              :projection="projection"
+              :cirqueArtDeLaRue="cirqueArtDeLaRue"
+              :jeunePublic="jeunePublic"
+              :operaMusical="operaMusical"
+              :autreSpectacle="autreSpectacle"
+              :photographie="photographie"
+              :beauxArts="beauxArts"
+              :artContemporain="artContemporain"
+              :streetArt="streetArt"
+              :histoireCivilisations="histoireCivilisations"
+              :illustrationBD="illustrationBD"
+              :autreExpo="autreExpo"
+              :classique="classique"
+              :folk="folk"
+              :hipHop="hipHop"
+              :reggae="reggae"
+              :chansonFrancaise="chansonFrancaise"
+              :popVariete="popVariete"
+              :rock="rock"
+              :jazz="jazz"
+              :musiquesDuMonde="musiquesDuMonde"
+              :electronique="electronique"
+              :autreConcert="autreConcert"
+              :brocanteMarche="brocanteMarche"
+              :evenementSportif="evenementSportif"
+              :festivalCycle="festivalCycle"
+              :soireeBal="soireeBal" 
+              :salon="salon"
+              :autreEvenement="autreEvenement"/>
            </v-flex>
            <v-flex  md6 sm12 :style="'min-height: ' + size + 'px; width: ' + size +'px !important;'">
               <Map :selectedFilters="filters" 
@@ -37,7 +78,48 @@
               :tea="tea"
               :artGallery="artGallery"
               :localProduct="localProduct"
-              :souvenirShop="souvenirShop"/>
+              :souvenirShop="souvenirShop"
+              
+              :balade="balade"
+              :atelierCours="atelierCours"
+              :conferenceDebat="conferenceDebat"
+              :stage="stage"
+              :visiteGuidee="visiteGuidee"
+              :loisirsJeux="loisirsJeux"
+              :lectureRencontre="lectureRencontre"
+              :autreAnimation="autreAnimation"
+              :humour="humour"
+              :danse="danse"
+              :theatre="theatre"
+              :projection="projection"
+              :cirqueArtDeLaRue="cirqueArtDeLaRue"
+              :jeunePublic="jeunePublic"
+              :operaMusical="operaMusical"
+              :autreSpectacle="autreSpectacle"
+              :photographie="photographie"
+              :beauxArts="beauxArts"
+              :artContemporain="artContemporain"
+              :streetArt="streetArt"
+              :histoireCivilisations="histoireCivilisations"
+              :illustrationBD="illustrationBD"
+              :autreExpo="autreExpo"
+              :classique="classique"
+              :folk="folk"
+              :hipHop="hipHop"
+              :reggae="reggae"
+              :chansonFrancaise="chansonFrancaise"
+              :popVariete="popVariete"
+              :rock="rock"
+              :jazz="jazz"
+              :musiquesDuMonde="musiquesDuMonde"
+              :electronique="electronique"
+              :autreConcert="autreConcert"
+              :brocanteMarche="brocanteMarche"
+              :evenementSportif="evenementSportif"
+              :festivalCycle="festivalCycle"
+              :soireeBal="soireeBal" 
+              :salon="salon"
+              :autreEvenement="autreEvenement"/>
           </v-flex>
     </v-layout>
   </div>
@@ -61,6 +143,7 @@ export default {
     this.initToilets();
     this.initMuseums();
     this.initShops();
+    this.initEvents();
   },
   data() {
     return{
@@ -77,6 +160,47 @@ export default {
       artGallery: [],
       localProduct: [],
       souvenirShop: [],
+
+      balade : [],
+      atelierCours: [],
+      conferenceDebat: [],
+      stage: [],
+      visiteGuidee: [],
+      loisirsJeux: [],
+      lectureRencontre: [],
+      autreAnimation: [],
+      humour: [],
+      danse: [],
+      theatre: [],
+      projection: [],
+      cirqueArtDeLaRue: [],
+      jeunePublic: [],
+      operaMusical: [],
+      autreSpectacle: [],
+      photographie: [],
+      beauxArts: [],
+      artContemporain: [],
+      streetArt: [],
+      histoireCivilisations: [],
+      illustrationBD: [],
+      autreExpo: [],
+      classique: [],
+      folk: [],
+      hipHop: [],
+      reggae: [],
+      chansonFrancaise: [],
+      popVariete: [],
+      rock: [],
+      jazz: [],
+      musiquesDuMonde: [],
+      electronique: [],
+      autreConcert: [],
+      brocanteMarche: [],
+      evenementSportif: [],
+      festivalCycle: [],
+      soireeBal: [], 
+      salon: [],
+      autreEvenement: [],
 
       size: 0,
 
@@ -210,6 +334,49 @@ export default {
       },function(err){
          thisRef.err = err;
       });
+    },
+    initEvents(){
+      var thisRef = this;
+      DataManager.getBalade (function(res){         thisRef.balade = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getAtelierCours(function(res){         thisRef.atelierCours = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getConferenceDebat(function(res){         thisRef.conferenceDebat = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getStage(function(res){         thisRef.stage = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getVisiteGuidee(function(res){         thisRef.visiteGuidee = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getLoisirsJeux(function(res){         thisRef.loisirsJeux = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getLectureRencontre(function(res){         thisRef.lectureRencontre = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getAutreAnimation(function(res){         thisRef.autreAnimation = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getHumour(function(res){         thisRef.humour = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getDanse (function(res){         thisRef.danse = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getTheatre(function(res){         thisRef.theatre = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getProjection(function(res){         thisRef.projection = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getCirqueArtDeLaRue(function(res){         thisRef.cirqueArtDeLaRue = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getJeunePublic(function(res){         thisRef.jeunePublic = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getOperaMusical(function(res){         thisRef.operaMusical = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getAutreSpectacle(function(res){         thisRef.autreSpectacle = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getPhotographie(function(res){         thisRef.photographie = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getBeauxArts(function(res){         thisRef.beauxArts = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getArtContemporain(function(res){         thisRef.artContemporain = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getStreetArt(function(res){         thisRef.streetArt = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getHistoireCivilisations(function(res){         thisRef.histoireCivilisations = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getIllustrationBD(function(res){         thisRef.illustrationBD = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getAutreExpo(function(res){         thisRef.autreExpo = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getClassique(function(res){         thisRef.classique = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getFolk(function(res){         thisRef.folk = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getHipHop(function(res){         thisRef.hipHop = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getReggae(function(res){         thisRef.reggae = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getChansonFrancaise(function(res){         thisRef.chansonFrancaise = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getPopVariete(function(res){         thisRef.popVariete = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getRock(function(res){         thisRef.rock = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getJazz(function(res){         thisRef.jazz = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getMusiquesDuMonde(function(res){         thisRef.musiquesDuMonde = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getElectronique(function(res){         thisRef.electronique = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getAutreConcert(function(res){         thisRef.autreConcert = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getBrocanteMarche(function(res){         thisRef.brocanteMarche = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getEvenementSportif(function(res){         thisRef.evenementSportif = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getFestivalCycle(function(res){         thisRef.festivalCycle = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getSoireeBal(function(res){         thisRef.soireeBal = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getSalon(function(res){         thisRef.salon = res;       },function(err){          thisRef.err = err;       });
+      DataManager.getAutreEvenement(function(res){         thisRef.autreEvenement = res;       },function(err){          thisRef.err = err;       });
     }
   }
 }
