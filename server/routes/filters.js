@@ -1,3 +1,49 @@
+var condition = {
+  "belle" : [
+    "ensoleille",
+    "nuit-claire",
+    "nuit-legerement-voilee",
+    "faibles-passages-nuageux",
+    "nuit-bien-degagee",
+    "nuit-claire-et-stratus",
+    "eclaircies",
+    "faiblement-nuageux"
+  ],
+  "mitigee": [
+    "ciel-voile",
+    "brouillard",
+    "stratus",
+    "stratus-se-dissipant",
+    "nuit-nuageuse",
+    "fortement-nuageux",
+    "averses-de-pluie-faible",
+    "pluie-faible",
+    "developpement-nuageux",
+    "nuit-avec-developpement-nuageux",
+    "averses-de-neige-faible",
+    "nuit-avec-averses-de-neige-faible",
+    "neige-faible"
+  ],
+  "mauvaise": [
+    "nuit-avec-averses",
+    "averses-de-pluie-moderee",
+    "averses-de-pluie-forte",
+    "couvert-avec-averses",
+    "pluie-forte",
+    "pluie-moderee",
+    "faiblement-orageux",
+    "nuit-faiblement-orageuse",
+    "orage-modere",
+    "fortement-orageux",
+    "neige-moderee",
+    "neige-forte",
+    "pluie-et-neige-mêlée-faible",
+    "pluie-et-neige-mêlée-modérée",
+    "pluie-et-neige-mêlée-forte"
+  ]
+};
+
+
 exports.getFilters = function(req, res){
     res.json({success: true, data: 
         [
@@ -5,6 +51,7 @@ exports.getFilters = function(req, res){
               id: 0,
               display_name: 'Shops',
               name: 'Shops',
+              condition: condition.mitigee.concat(condition.mauvaise),
               children: [
                 {
                   id: 4,
@@ -72,12 +119,14 @@ exports.getFilters = function(req, res){
             {
               id: 1,
               name: 'Touristiques area',
-              display_name: 'Touristiques area'
+              display_name: 'Touristiques area',
+              condition: condition.belle
             },
             {
               id: 2,
               name: 'Museums',
-              display_name: 'Museums'
+              display_name: 'Museums',
+              condition: condition.mauvaise
             },
             {
               id: 3,
@@ -88,6 +137,7 @@ exports.getFilters = function(req, res){
               id: 15,
               name: 'Events',
               display_name: 'Events',
+              condition: condition.belle.concat(condition.mitigee),
               children: [
                 {
                   id: 16,

@@ -712,353 +712,203 @@ export default {
       return markers;
     },
     getToiletsLayer(){
-      if (this.toiletsLayer == undefined) {
-        this.toilersLayer = this.getMarkers("Toilets", "#00FF00", this.toilets, false);
-      }
-      
+      if (this.toiletsLayer == undefined)this.toilersLayer = this.getMarkers("Toilets", "#00FF00", this.toilets, false);
       return this.toilersLayer;
     },
     getMuseumsLayer(){
-      if (this.museumsLayer == undefined) {
-        this.museumsLayer = this.getMarkers("Museums", "#00FF00", this.museums, true);
-      }
-      
+      if (this.museumsLayer == undefined)this.museumsLayer = this.getMarkers("Museums", "#00FF00", this.museums, true);
       return this.museumsLayer;
     },
     getFrenchTraditionalRestaurantLayer(){
-      if (this.frenchTraditionalRestaurantLayer == undefined) {
-        this.frenchTraditionalRestaurantLayer = this.getMarkers("FrenchTraditionalRestaurant", "#00FF00", this.frenchTraditionalRestaurant, true);
-      }
-      
+      if (this.frenchTraditionalRestaurantLayer == undefined) this.frenchTraditionalRestaurantLayer = this.getMarkers("FrenchTraditionalRestaurant", "#00FF00", this.frenchTraditionalRestaurant, true);
       return this.frenchTraditionalRestaurantLayer;
     },
     getSatFastFoodLayer(){
-      if (this.satFastFoodLayer == undefined) {
-        this.satFastFoodLayer = this.getMarkers("SatFastFoodLayer", "#00FF00", this.satFastFood, true);
-      }
-      
+      if (this.satFastFoodLayer == undefined) this.satFastFoodLayer = this.getMarkers("SatFastFoodLayer", "#00FF00", this.satFastFood, true);
       return this.satFastFoodLayer;
     },
     getStandingFastFoodLayer(){
-      if (this.standingFastFoodLayer == undefined) {
-        this.standingFastFoodLayer = this.getMarkers("StandingFastFoodLayer", "#00FF00", this.standingFastFood, true);
-      }
-      
+      if (this.standingFastFoodLayer == undefined) this.standingFastFoodLayer = this.getMarkers("StandingFastFoodLayer", "#00FF00", this.standingFastFood, true);
       return this.standingFastFoodLayer;
     },
     getBarCoffeeLayer(){
-      if (this.barCoffeeLayer == undefined) {
-        this.barCoffeeLayer = this.getMarkers("BarAndCoffee", "#00FF00", this.barAndCoffee, true);
-      }
-      
+      if (this.barCoffeeLayer == undefined) this.barCoffeeLayer = this.getMarkers("BarAndCoffee", "#00FF00", this.barAndCoffee, true);
       return this.barCoffeeLayer;
     },
     getTeaLayer(){
-      if (this.teaLayer == undefined) {
-        this.teaLayer = this.getMarkers("Tea", "#00FF00", this.tea, true);
-      }
-      
+      if (this.teaLayer == undefined) this.teaLayer = this.getMarkers("Tea", "#00FF00", this.tea, true);
       return this.teaLayer;
     },
     getArtGalleryLayer(){
-      if (this.artGalleryLayer == undefined) {
-        this.artGalleryLayer = this.getMarkers("ArtGallery", "#00FF00", this.artGallery, true);
-      }
-      
+      if (this.artGalleryLayer == undefined) this.artGalleryLayer = this.getMarkers("ArtGallery", "#00FF00", this.artGallery, true);
       return this.artGalleryLayer;
     },
     getLocalProductLayer(){
-      if (this.localProductLayer == undefined) {
-        this.localProductLayer = this.getMarkers("LocalProduct", "#00FF00", this.localProduct, true);
-      }
-      
+      if (this.localProductLayer == undefined)this.localProductLayer = this.getMarkers("LocalProduct", "#00FF00", this.localProduct, true);
       return this.localProductLayer;
     },
     getSouvenirLayer(){
-      if (this.souvenirLayer == undefined) {
-        this.souvenirLayer = this.getMarkers("SouvenirShop", "#00FF00", this.souvenirShop, true);
-      }
-      
+      if (this.souvenirLayer == undefined)this.souvenirLayer = this.getMarkers("SouvenirShop", "#00FF00", this.souvenirShop, true);
       return this.souvenirLayer;
     },
     getBrocanteLayer(){
-      if (this.brocanteLayer == undefined) {
-        this.brocanteLayer = this.getMarkers("Brocante / Market", "#00FF00", this.brocanteMarche, true);
-      }
-      
+      if (this.brocanteLayer == undefined) this.brocanteLayer = this.getMarkers("Brocante / Market", "#00FF00", this.brocanteMarche, true);
       return this.brocanteLayer;
     },
     getEvenementSportifLayer(){
-      if (this.evenementSportifLayer == undefined) {
-        this.evenementSportifLayer = this.getMarkers("Sport", "#00FF00", this.evenementSportif, true);
-      }
-      
+      if (this.evenementSportifLayer == undefined) this.evenementSportifLayer = this.getMarkers("Sport", "#00FF00", this.evenementSportif, true);
       return this.evenementSportifLayer;
     },
     getFestivalLayer(){
-      if (this.festivalLayer == undefined) {
-        this.festivalLayer = this.getMarkers("FestivalLayer", "#00FF00", this.festivalCycle, true);
-      }
-      
+      if (this.festivalLayer == undefined)this.festivalLayer = this.getMarkers("FestivalLayer", "#00FF00", this.festivalCycle, true);
       return this.festivalLayer;
     },
     getFeteLayer(){
-      if (this.feteLayer == undefined) {
-        this.feteLayer = this.getMarkers("Party / Parade", "#00FF00", this.soireeBal, true);
-      }
-      
+      if (this.feteLayer == undefined)this.feteLayer = this.getMarkers("Party / Parade", "#00FF00", this.soireeBal, true);
       return this.feteLayer;
     },
     getSalonLayer(){
-      if (this.salonLayer == undefined) {
-        this.salonLayer = this.getMarkers("SalonLayer", "#00FF00", this.salon, true);
-      }
-      
+      if (this.salonLayer == undefined) this.salonLayer = this.getMarkers("SalonLayer", "#00FF00", this.salon, true);
       return this.salonLayer;
     },
     getAutreEvenementLayer(){
-      if (this.autreEvenementLayer == undefined) {
-        this.autreEvenementLayer = this.getMarkers("Other Event", "#00FF00", this.autreEvenement, true);
-      }
-      
+      if (this.autreEvenementLayer == undefined) this.autreEvenementLayer = this.getMarkers("Other Event", "#00FF00", this.autreEvenement, true);
       return this.autreEvenementLayer;
     },
     getBaladeLayer(){
-      if (this.baladeLayer == undefined) {
-        this.baladeLayer = this.getMarkers("Walk", "#00FF00", this.balade, true);
-      }
-      
+      if (this.baladeLayer == undefined) this.baladeLayer = this.getMarkers("Walk", "#00FF00", this.balade, true);
       return this.baladeLayer;
     },
     getAtelierLayer(){
-       if (this.atelierLayer == undefined) {
-        this.atelierLayer = this.getMarkers("Workshop, Course", "#00FF00", this.atelierCours, true);
-      }
-      
+       if (this.atelierLayer == undefined) this.atelierLayer = this.getMarkers("Workshop, Course", "#00FF00", this.atelierCours, true);
       return this.atelierLayer;
     },
     getConferenceLayer(){
-       if (this.conferenceLayer == undefined) {
-        this.conferenceLayer = this.getMarkers("Conference / Debate", "#00FF00", this.conferenceDebat, true);
-      }
-      
+       if (this.conferenceLayer == undefined) this.conferenceLayer = this.getMarkers("Conference / Debate", "#00FF00", this.conferenceDebat, true);
       return this.conferenceLayer;
     },
     getLectureLayer(){
-       if (this.lectureLayer == undefined) {
-        this.lectureLayer = this.getMarkers("Reading / Meeting", "#00FF00", this.lectureRencontre, true);
-      }
-      
+       if (this.lectureLayer == undefined)this.lectureLayer = this.getMarkers("Reading / Meeting", "#00FF00", this.lectureRencontre, true);
       return this.lectureLayer;
     },
     getStageLayer(){
-       if (this.stageLayer == undefined) {
-        this.stageLayer = this.getMarkers("Traineeship", "#00FF00", this.stage, true);
-      }
-      
+       if (this.stageLayer == undefined)this.stageLayer = this.getMarkers("Traineeship", "#00FF00", this.stage, true);
       return this.stageLayer;
     },
     getVisiteGuideeLayer(){
-       if (this.visiteGuideeLayer == undefined) {
-        this.visiteGuideeLayer = this.getMarkers("Guided tour", "#00FF00", this.visiteGuidee, true);
-      }
-      
+       if (this.visiteGuideeLayer == undefined)this.visiteGuideeLayer = this.getMarkers("Guided tour", "#00FF00", this.visiteGuidee, true);
       return this.visiteGuideeLayer;
     },
     getLoisirLayer(){
-       if (this.loisirLayer == undefined) {
-        this.loisirLayer = this.getMarkers("Hobbies / Games", "#00FF00", this.loisirsJeux, true);
-      }
-      
+       if (this.loisirLayer == undefined)this.loisirLayer = this.getMarkers("Hobbies / Games", "#00FF00", this.loisirsJeux, true);
       return this.loisirLayer;
     },
     getAutreAnimationLayer(){
-       if (this.autreAnimationLayer == undefined) {
-        this.autreAnimationLayer = this.getMarkers("Other animation", "#00FF00", this.autreAnimation, true);
-      }
-      
+       if (this.autreAnimationLayer == undefined)this.autreAnimationLayer = this.getMarkers("Other animation", "#00FF00", this.autreAnimation, true);
       return this.autreAnimationLayer;
     },
     getHumourLayer(){
-       if (this.humourLayer == undefined) {
-        this.humourLayer = this.getMarkers("Humor", "#00FF00", this.humour, true);
-      }
-      
+       if (this.humourLayer == undefined) this.humourLayer = this.getMarkers("Humor", "#00FF00", this.humour, true);
       return this.humourLayer;
     },
     getDanseLayer(){
-       if (this.danseLayer == undefined) {
-        this.danseLayer = this.getMarkers("Dance", "#00FF00", this.danse, true);
-      }
-      
+       if (this.danseLayer == undefined)this.danseLayer = this.getMarkers("Dance", "#00FF00", this.danse, true);
       return this.danseLayer;
     },
     getTheatreLayer(){
-       if (this.theatreLayer == undefined) {
-        this.theatreLayer = this.getMarkers("Theater", "#00FF00", this.theatre, true);
-      }
-      
+       if (this.theatreLayer == undefined)this.theatreLayer = this.getMarkers("Theater", "#00FF00", this.theatre, true);
       return this.theatreLayer;
     },
     getProjectionLayer(){
-       if (this.projectionLayer == undefined) {
-        this.projectionLayer = this.getMarkers("ProjectionLayer", "#00FF00", this.projection, true);
-      }
-      
+       if (this.projectionLayer == undefined) this.projectionLayer = this.getMarkers("ProjectionLayer", "#00FF00", this.projection, true);
       return this.projectionLayer;
     },
     getCirqueLayer(){
-       if (this.cirqueLayer == undefined) {
-        this.cirqueLayer = this.getMarkers("Circus / Street Art", "#00FF00", this.cirqueArtDeLaRue, true);
-      }
-      
+       if (this.cirqueLayer == undefined)this.cirqueLayer = this.getMarkers("Circus / Street Art", "#00FF00", this.cirqueArtDeLaRue, true);
       return this.cirqueLayer;
     },
     getJeuneLayer(){
-       if (this.jeuneLayer == undefined) {
-        this.jeuneLayer = this.getMarkers("Young audience", "#00FF00", this.jeunePublic, true);
-      }
-      
+       if (this.jeuneLayer == undefined)this.jeuneLayer = this.getMarkers("Young audience", "#00FF00", this.jeunePublic, true);
       return this.jeuneLayer;
     },
     getOperaLayer(){
-       if (this.operaLayer == undefined) {
-        this.operaLayer = this.getMarkers("Opera / Musical", "#00FF00", this.operaMusical, true);
-      }
-      
+       if (this.operaLayer == undefined)this.operaLayer = this.getMarkers("Opera / Musical", "#00FF00", this.operaMusical, true);
       return this.operaLayer;
     },
     getAutreSpectacleLayer(){
-       if (this.autreSpectacleLayer == undefined) {
-        this.autreSpectacleLayer = this.getMarkers("Other show", "#00FF00", this.autreSpectacle, true);
-      }
-      
+       if (this.autreSpectacleLayer == undefined)this.autreSpectacleLayer = this.getMarkers("Other show", "#00FF00", this.autreSpectacle, true);
       return this.autreSpectacleLayer;
     },
     getPhotographieLayer(){
-       if (this.photographieLayer == undefined) {
-        this.photographieLayer = this.getMarkers("Photography", "#00FF00", this.photographie, true);
-      }
-      
+       if (this.photographieLayer == undefined)this.photographieLayer = this.getMarkers("Photography", "#00FF00", this.photographie, true);
       return this.photographieLayer;
     },
     getBeauxArtsLayer(){
-       if (this.beauxArtsLayer == undefined) {
-        this.beauxArtsLayer = this.getMarkers("BeauxArtsLayer", "#00FF00", this.beauxArts, true);
-      }
-      
+       if (this.beauxArtsLayer == undefined)this.beauxArtsLayer = this.getMarkers("BeauxArtsLayer", "#00FF00", this.beauxArts, true);
       return this.beauxArtsLayer;
     },
     getArtContemporainLayer(){
-       if (this.artContemporainLayer == undefined) {
-        this.artContemporainLayer = this.getMarkers("Contemporary art", "#00FF00", this.artContemporain, true);
-      }
-      
+       if (this.artContemporainLayer == undefined)this.artContemporainLayer = this.getMarkers("Contemporary art", "#00FF00", this.artContemporain, true);
       return this.artContemporainLayer;
     },
     getStreetArtLayer(){
-       if (this.streetArtLayer == undefined) {
-        this.streetArtLayer = this.getMarkers("StreetArtLayer", "#00FF00", this.streetArt, true);
-      }
-      
+       if (this.streetArtLayer == undefined) this.streetArtLayer = this.getMarkers("StreetArtLayer", "#00FF00", this.streetArt, true);
       return this.streetArtLayer;
     },
     getHistoireLayer(){
-       if (this.histoireLayer == undefined) {
-        this.histoireLayer = this.getMarkers("History / Civilizations", "#00FF00", this.histoireCivilisations, true);
-      }
-      
+       if (this.histoireLayer == undefined) this.histoireLayer = this.getMarkers("History / Civilizations", "#00FF00", this.histoireCivilisations, true);
       return this.histoireLayer;
     },
     getIllustrationLayer(){
-       if (this.illustrationLayer == undefined) {
-        this.illustrationLayer = this.getMarkers("Illustration / comic", "#00FF00", this.illustrationBD, true);
-      }
-      
+       if (this.illustrationLayer == undefined)this.illustrationLayer = this.getMarkers("Illustration / comic", "#00FF00", this.illustrationBD, true);
       return this.illustrationLayer;
     },
     getAutreExpoLayer(){
-       if (this.autreExpoLayer == undefined) {
-        this.autreExpoLayer = this.getMarkers("Other expositions", "#00FF00", this.autreExpo, true);
-      }
-      
+       if (this.autreExpoLayer == undefined)this.autreExpoLayer = this.getMarkers("Other expositions", "#00FF00", this.autreExpo, true);
       return this.autreExpoLayer;
     },
     getClassiqueLayer(){
-       if (this.classiqueLayer == undefined) {
-        this.classiqueLayer = this.getMarkers("Classical", "#00FF00", this.classique, true);
-      }
-      
+       if (this.classiqueLayer == undefined) this.classiqueLayer = this.getMarkers("Classical", "#00FF00", this.classique, true);
       return this.classiqueLayer;
     },
     getChansonFrancaiseLayer(){
-       if (this.chansonFrancaiseLayer == undefined) {
-        this.chansonFrancaiseLayer = this.getMarkers("French song", "#00FF00", this.chansonFrancaise, true);
-      }
-      
+       if (this.chansonFrancaiseLayer == undefined) this.chansonFrancaiseLayer = this.getMarkers("French song", "#00FF00", this.chansonFrancaise, true);
       return this.chansonFrancaiseLayer;
     },
     getPopLayer(){
-       if (this.popLayer == undefined) {
-        this.popLayer = this.getMarkers("Pop / Variety", "#00FF00", this.popVariete, true);
-      }
-      
+       if (this.popLayer == undefined) this.popLayer = this.getMarkers("Pop / Variety", "#00FF00", this.popVariete, true);
       return this.popLayer;
     },
     getRockLayer(){
-       if (this.rockLayer == undefined) {
-        this.rockLayer = this.getMarkers("RockLayer", "#00FF00", this.rock, true);
-      }
-      
+       if (this.rockLayer == undefined)this.rockLayer = this.getMarkers("RockLayer", "#00FF00", this.rock, true);
       return this.rockLayer;
     },
     getJazzLayer(){
-       if (this.jazzLayer == undefined) {
-        this.jazzLayer = this.getMarkers("JazzLayer", "#00FF00", this.jazz, true);
-      }
-      
+       if (this.jazzLayer == undefined)this.jazzLayer = this.getMarkers("JazzLayer", "#00FF00", this.jazz, true);
       return this.jazzLayer;
     },
     getMusiqueDuMondeLayer(){
-      if (this.musiqueDuMondeLayer == undefined) {
-        this.musiqueDuMondeLayer = this.getMarkers("World music", "#00FF00", this.musiquesDuMonde, true);
-      }
-      
+      if (this.musiqueDuMondeLayer == undefined)this.musiqueDuMondeLayer = this.getMarkers("World music", "#00FF00", this.musiquesDuMonde, true);
       return this.musiqueDuMondeLayer;
     },
     getElectroniqueLayer(){
-      if (this.electroniqueLayer == undefined) {
-        this.electroniqueLayer = this.getMarkers("Electronic", "#00FF00", this.electronique, true);
-      }
-      
+      if (this.electroniqueLayer == undefined)this.electroniqueLayer = this.getMarkers("Electronic", "#00FF00", this.electronique, true);
       return this.electroniqueLayer;
     },
     getFolkLayer(){
-      if (this.folkLayer == undefined) {
-        this.folkLayer = this.getMarkers("FolkLayer", "#00FF00", this.folk, true);
-      }
-      
+      if (this.folkLayer == undefined)this.folkLayer = this.getMarkers("FolkLayer", "#00FF00", this.folk, true);
       return this.folkLayer;
     },
     getHipHopLayer(){
-      if (this.hipHopLayer == undefined) {
-        this.hipHopLayer = this.getMarkers("HipHopLayer", "#00FF00", this.hipHop, true);
-      }
-      
+      if (this.hipHopLayer == undefined)this.hipHopLayer = this.getMarkers("HipHopLayer", "#00FF00", this.hipHop, true);
       return this.hipHopLayer;
     },
     getReggaeLayer() {
-      if (this.reggaeLayer == undefined) {
-        this.reggaeLayer = this.getMarkers("ReggaeLayer", "#00FF00", this.reggae, true);
-      }
-      
+      if (this.reggaeLayer == undefined)this.reggaeLayer = this.getMarkers("ReggaeLayer", "#00FF00", this.reggae, true);
       return this.reggaeLayer;
     },
     getAutreConcertLayer(){
-      if (this.autreConcertLayer == undefined) {
-        this.autreConcertLayer = this.getMarkers("Other concert", "#00FF00", this.autreConcert, true);
-      }
-      
+      if (this.autreConcertLayer == undefined) this.autreConcertLayer = this.getMarkers("Other concert", "#00FF00", this.autreConcert, true);
       return this.autreConcertLayer;
     }
   }
