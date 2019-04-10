@@ -1,23 +1,26 @@
 
 <template>
-<div class="container">
-  <div class="card-media">
-    <!-- media container -->
-    <div class="card-media-object-container">
-      <div class="card-media-object" :style="'background-image: url(' + imageUrl + ');'"></div>
-    </div>
-    <!-- body container -->
-    <div class="card-media-body">
-      <div class="card-media-body-top">
-        <span class="subtle">{{date + " BY " + source}}</span>
-      </div>
-      <p class="card-media-body-heading" style="overflow: hidden;">{{title}}</p>
-      <div class="card-media-body-supporting-bottom">
-        <span class="card-media-body-supporting-bottom-text subtle">{{description}}</span>
-      </div>
-    </div>
-  </div>
-</div>
+  <v-card blue darken-2 class="white--text" style="min-height: 23vw;">
+    <v-layout style="height: 100%;">
+      <v-flex lg5 md12 hidden-sm12-and-down>
+        <v-img
+          :src="imageUrl"
+          height="100%"
+          style="min-height: 10vw;"
+          contain
+        ></v-img>
+      </v-flex>
+      <v-flex lg7 md12 >
+        <v-card-title primary-title>
+          <div>
+            <div class="headline">{{title}}</div>
+            <div>{{date + " BY " + source}}</div>
+            <div style="padding-top: 2vw;">{{description}}</div>
+          </div>
+        </v-card-title>
+      </v-flex>
+    </v-layout>
+  </v-card>
 </template>
 
 <script>
@@ -50,79 +53,5 @@ export default {
 </script>
 
 <style scoped>
-  html {
-    background-color: #fefefe;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-
-  .container {
-    margin: 50px auto 0;
-    width: 80%;
-  }
-
-  .subtle {
-    color: #888;
-    font-size: 12px;
-  }
-
-  .card-media {
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
-    height: 125px;
-    margin-bottom: 25px;
-    transition: all 300ms ease-out;
-    width: 100%;
-  }
-
-  .card-media:hover {
-    box-shadow: 0 5px 14px rgba(0, 0, 0, .2);
-  }
-
-  .card-media-object-container {
-    background: none;
-    float: left;
-    height: 100%;
-    width: 35%;
-    position: relative;
-  }
-
-  .card-media-object {
-    background-position: center center;
-    background-size: cover;
-    height: 100%;
-  }
-
-  .card-media-object-tag {
-    background-color: #fff;
-    border-radius: 2px;
-    padding: 2px 7px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-  }
-
-  .card-media-body {
-    background-color: #fff;
-    float: left;
-    height: 100%;
-    padding: 12px 15px;
-    position: relative;
-    width: 65%;
-  }
-
-  .card-media-body-top {
-    display: block;
-  }
-
-  .card-media-body-heading {
-    display: block;
-    margin-top: 10px;
-  }
+  
 </style>
