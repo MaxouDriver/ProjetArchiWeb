@@ -1,30 +1,11 @@
 <template>
   <div style="height: 100%;">
     <v-data-table :headers="headers" :items="activities" class="elevation-1" style="height: 100%;">
-        <template v-slot:items="props">
-          <td>{{ props.item.name }}</td>
-          <td class="text-xs-right">{{ props.item.cathegory }}</td>
-        </template>
-      </v-data-table>
-    <v-card flat style="position: relative;">
-      <v-bottom-nav :value="true" absolute color="transparent">
-        <v-btn color="teal" flat value="morning" >
-          <span>Morning</span>
-        </v-btn>
-
-        <v-btn color="teal" flat value="afternoon"  >
-          <span>Afternoon</span>
-        </v-btn>
-
-        <v-btn color="teal" flat value="evening" >
-          <span>Evening</span>
-        </v-btn>
-
-        <v-btn color="teal" flat value="night" >
-          <span>Night</span>
-        </v-btn>
-      </v-bottom-nav>
-    </v-card>
+      <template v-slot:items="props">
+        <td v-on:click="onSelectedRow(props.item.id)">{{ props.item.name }}</td>
+        <td v-on:click="onSelectedRow(props.item.id)" class="text-xs-right">{{ props.item.cathegory }}</td>
+      </template>
+    </v-data-table>
   </div>
 </template>
 <script>
@@ -84,7 +65,10 @@
       festivalCycle: Array,
       soireeBal: Array, 
       salon: Array,
-      autreEvenement: Array
+      autreEvenement: Array,
+
+
+      onSelectedRow: { type: Function }
     },
     data: () => ({
       date: new Date().toISOString().substr(0, 10),
@@ -118,7 +102,7 @@
         var spectaclesCat = false;
         var expositionsCat = false;
         var concertsCat = false;
-
+        //Loop through every filter and add corresponding layer(s) to the map.
           this.selectedFilters.forEach(function(activity){
             shopCat = false;
             restaurantCat = false;
@@ -135,13 +119,13 @@
 
               case "Touristiques area":
                 thisRef.zonesTouristiques.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Zones touristiques'});
+                  result.push({id: element.id, name: element.name, cathegory: 'Zones touristiques'});
                 });
                 break;
 
               case "Museums":
                 thisRef.museums.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Museums'});
+                  result.push({id: element.id, name: element.name, cathegory: 'Museums'});
                 });
                 break;
 
@@ -156,7 +140,7 @@
                 /* falls through */
               case "French Traditional":
                 thisRef.frenchTraditionalRestaurant.forEach(element => {
-                  result.push({name: element.name, cathegory: 'French Traditional'});
+                  result.push({id: element.id, name: element.name, cathegory: 'French Traditional'});
                 });
                 if (restaurantCat != true){
                   break;
@@ -167,7 +151,7 @@
                 break;
               case "Sat":
                 thisRef.satFastFood.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Sat'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Sat'});
                 });
                 if (fastFoodCat != true){
                   break;
@@ -175,7 +159,7 @@
                 /* falls through */
               case "Standing":
                 thisRef.standingFastFood.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Standing'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Standing'});
                 });
                 if (restaurantCat != true){
                   break;
@@ -186,7 +170,7 @@
                 break;
               case "Bar/Coffee":
                 thisRef.barAndCoffee.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Bar/Coffee'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Bar/Coffee'});
                 });
                 if (beverageCat != true){
                   break;
@@ -194,7 +178,7 @@
                 /* falls through */
               case "Tea":
                 thisRef.tea.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Tea'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Tea'});
                 });
                 if (shopCat != true){
                   break;
@@ -202,7 +186,7 @@
                 /* falls through */
               case "Art Gallery":
                 thisRef.artGallery.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Art Gallery'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Art Gallery'});
                 });
                 if (shopCat != true){
                   break;
@@ -210,7 +194,7 @@
                 /* falls through */
               case "Local Product":
                 thisRef.localProduct.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Local Product'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Local Product'});
                 });
                 if (shopCat != true){
                   break;
@@ -218,7 +202,7 @@
                 /* falls through */
               case "Souvenir":
                 thisRef.souvenirShop.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Souvenir'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Souvenir'});
                 });
                 
                 break;
@@ -234,7 +218,7 @@
               /* falls through */
               case "Brocante / Market":
                 thisRef.brocanteMarche.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Brocante / Market'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Brocante / Market'});
                 });
                 if (eventsCat != true){
                   break;
@@ -242,7 +226,7 @@
               /* falls through */
               case "Sport":
                 thisRef.evenementSportif.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Sport'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Sport'});
                 });
                 if (eventsCat != true){
                   break;
@@ -250,7 +234,7 @@
                 /* falls through */
               case "Festival / Cycle":
                 thisRef.festivalCycle.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Festival / Cycle'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Festival / Cycle'});
                 });
                 if (eventsCat != true){
                   break;
@@ -258,7 +242,7 @@
                 /* falls through */
               case "Party / Parade":
                 thisRef.soireeBal.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Party / Parade'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Party / Parade'});
                 });
                 if (eventsCat != true){
                   break;
@@ -266,7 +250,7 @@
                 /* falls through */
               case "Salon":
                 thisRef.salon.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Salon'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Salon'});
                 });
                 if (eventsCat != true){
                   break;
@@ -274,7 +258,7 @@
                 /* falls through */
               case "Other":
                 thisRef.autreEvenement.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Other Event'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Other Event'});
                 });
                 break;
 
@@ -285,7 +269,7 @@
               /* falls through */
               case "Walk":
                 thisRef.balade.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Walk'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Walk'});
                 });
                 if (animationsCat != true){
                   break;
@@ -293,7 +277,7 @@
               /* falls through */
               case "Workshop, Course":
                 thisRef.atelierCours.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Workshop, Course'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Workshop, Course'});
                 });
                 if (animationsCat != true){
                   break;
@@ -301,7 +285,7 @@
               /* falls through */
               case "Conference / Debate":
                 thisRef.conferenceDebat.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Conference / Debate'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Conference / Debate'});
                 });
                 if (animationsCat != true){
                   break;
@@ -309,7 +293,7 @@
               /* falls through */
               case "Reading / Meeting":
                 thisRef.lectureRencontre.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Reading / Meeting'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Reading / Meeting'});
                 });
                 if (animationsCat != true){
                   break;
@@ -317,7 +301,7 @@
               /* falls through */
               case "Traineeship":
                 thisRef.stage.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Traineeship'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Traineeship'});
                 });
                 if (animationsCat != true){
                   break;
@@ -325,7 +309,7 @@
               /* falls through */
               case "Guided tour":
                 thisRef.visiteGuidee.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Guided tour'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Guided tour'});
                 });
                 if (animationsCat != true){
                   break;
@@ -333,7 +317,7 @@
               /* falls through */
               case "Hobbies / Games":
                 thisRef.loisirsJeux.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Hobbies / Games'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Hobbies / Games'});
                 });
                 if (animationsCat != true){
                   break;
@@ -341,7 +325,7 @@
               /* falls through */
               case "Other animation":
                 thisRef.autreAnimation.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Other animation'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Other animation'});
                 });
                 break;
                 
@@ -351,7 +335,7 @@
               /* falls through */
               case "Humor":
                 thisRef.humour.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Humor'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Humor'});
                 });
                 if (spectaclesCat != true){
                   break;
@@ -359,7 +343,7 @@
               /* falls through */
               case "Dance":
                 thisRef.danse.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Dance'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Dance'});
                 });
                 if (spectaclesCat != true){
                   break;
@@ -367,7 +351,7 @@
                 /* falls through */
               case "Theater":
                 thisRef.theatre.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Theater'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Theater'});
                 });
                 if (spectaclesCat != true){
                   break;
@@ -375,7 +359,7 @@
                 /* falls through */
               case "Projection":
                 thisRef.projection.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Projection'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Projection'});
                 });
                 if (spectaclesCat != true){
                   break;
@@ -383,7 +367,7 @@
                 /* falls through */
               case "Circus / Street Art":
                 thisRef.cirqueArtDeLaRue.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Circus / Street Art'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Circus / Street Art'});
                 });
                 if (spectaclesCat != true){
                   break;
@@ -391,7 +375,7 @@
                 /* falls through */
               case "Young audience":
                 thisRef.jeunePublic.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Young audience'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Young audience'});
                 });
                 if (spectaclesCat != true){
                   break;
@@ -399,7 +383,7 @@
                 /* falls through */
               case "Opera / Musical":
                 thisRef.operaMusical.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Opera / Musical'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Opera / Musical'});
                 });
                 if (spectaclesCat != true){
                   break;
@@ -407,7 +391,7 @@
                 /* falls through */
               case "Other show":
                 thisRef.autreSpectacle.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Other show'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Other show'});
                 });
                 break;
 
@@ -417,7 +401,7 @@
               /* falls through */
               case "Photography":
                 thisRef.photographie.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Photography'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Photography'});
                 });
                 if (expositionsCat != true){
                   break;
@@ -425,7 +409,7 @@
               /* falls through */
               case "Beaux-Arts":
                 thisRef.beauxArts.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Beaux-Arts'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Beaux-Arts'});
                 });
                 if (expositionsCat != true){
                   break;
@@ -433,7 +417,7 @@
                 /* falls through */
               case "Contemporary art":
                 thisRef.artContemporain.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Contemporary art'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Contemporary art'});
                 });
                 if (expositionsCat != true){
                   break;
@@ -441,7 +425,7 @@
                 /* falls through */
               case "Street-art":
                 thisRef.streetArt.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Street-art'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Street-art'});
                 });
                 if (expositionsCat != true){
                   break;
@@ -449,7 +433,7 @@
                 /* falls through */
               case "History / Civilizations":
                 thisRef.histoireCivilisations.forEach(element => {
-                  result.push({name: element.name, cathegory: 'History / Civilizations'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'History / Civilizations'});
                 });
                 if (expositionsCat != true){
                   break;
@@ -457,7 +441,7 @@
                 /* falls through */
               case "Illustration / comic":
                 thisRef.illustrationBD.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Illustration / comic'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Illustration / comic'});
                 });
                 if (expositionsCat != true){
                   break;
@@ -465,7 +449,7 @@
                 /* falls through */
               case "Other expositions":
                 thisRef.autreExpo.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Other expositions'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Other expositions'});
                 });
                 break;
 
@@ -475,7 +459,7 @@
               /* falls through */
               case "Classical":
                 thisRef.classique.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Classical'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Classical'});
                 });
                 if (concertsCat != true){
                   break;
@@ -483,7 +467,7 @@
                 /* falls through */
               case "French song":
                 thisRef.chansonFrancaise.forEach(element => {
-                  result.push({name: element.name, cathegory: 'French song'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'French song'});
                 });
                 if (concertsCat != true){
                   break;
@@ -491,7 +475,7 @@
                 /* falls through */
               case "Pop / Variety":
                 thisRef.popVariete.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Pop / Variety'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Pop / Variety'});
                 });
                 if (concertsCat != true){
                   break;
@@ -499,7 +483,7 @@
                 /* falls through */
               case "Rock":
                 thisRef.rock.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Rock'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Rock'});
                 });
                 if (concertsCat != true){
                   break;
@@ -507,7 +491,7 @@
                 /* falls through */
               case "Jazz":
                 thisRef.jazz.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Jazz'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Jazz'});
                 });
                 if (concertsCat != true){
                   break;
@@ -515,7 +499,7 @@
                 /* falls through */
               case "World music":
                 thisRef.musiquesDuMonde.forEach(element => {
-                  result.push({name: element.name, cathegory: 'World music'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'World music'});
                 });
                 if (concertsCat != true){
                   break;
@@ -523,7 +507,7 @@
                 /* falls through */
               case "Electronic":
                 thisRef.electronique.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Electronic'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Electronic'});
                 });
                 if (concertsCat != true){
                   break;
@@ -531,7 +515,7 @@
                 /* falls through */
               case "Folk":
                 thisRef.folk.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Folk'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Folk'});
                 });
                 if (concertsCat != true){
                   break;
@@ -539,7 +523,7 @@
                 /* falls through */
               case "Hip-Hop":
                 thisRef.hipHop.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Hip-Hop'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Hip-Hop'});
                 });
                 if (concertsCat != true){
                   break;
@@ -547,7 +531,7 @@
                 /* falls through */
               case "Reggae":
                 thisRef.reggae.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Reggae'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Reggae'});
                 });
                 if (concertsCat != true){
                   break;
@@ -555,7 +539,7 @@
                 /* falls through */
               case "Other concert":
                 thisRef.autreConcert.forEach(element => {
-                  result.push({name: element.name, cathegory: 'Other concert'});
+                  result.push({id: element.id, name: element.name,  cathegory: 'Other concert'});
                 });
                 break;
             }

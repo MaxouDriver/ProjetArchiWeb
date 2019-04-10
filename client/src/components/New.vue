@@ -1,16 +1,16 @@
 
 <template>
-  <v-card blue darken-2 class="white--text" style="min-height: 23vw;">
+  <v-card blue darken-2 class="white--text" style="padding: 5vw; min-height: 5vw;">
     <v-layout style="height: 100%;">
-      <v-flex lg5 md12 hidden-sm12-and-down>
+      <v-flex lg2 md12 hidden-sm12-and-down>
         <v-img
           :src="imageUrl"
           height="100%"
-          style="min-height: 10vw;"
+          style="min-height: 2vw;"
           contain
         ></v-img>
       </v-flex>
-      <v-flex lg7 md12 >
+      <v-flex lg10 md12 >
         <v-card-title primary-title>
           <div>
             <div class="headline">{{title}}</div>

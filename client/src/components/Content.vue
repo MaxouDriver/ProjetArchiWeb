@@ -3,7 +3,7 @@
     <Filters :onFiltersUpdated="onFiltersUpdated"/>
     <v-layout row wrap fill-height :style="'min-height: ' + size + 'px;'">
           <v-flex  md6 sm12 :style="'min-height: ' + size + 'px;'">
-              <DataSelector :selectedFilters="filters" :zonesTouristiques="zonesTouristiques" :toilets="toilets" :museums="museums" :frenchTraditionalRestaurant="frenchTraditionalRestaurant"
+              <DataSelector :onSelectedRow="onSelectedRow" :selectedFilters="filters" :zonesTouristiques="zonesTouristiques" :toilets="toilets" :museums="museums" :frenchTraditionalRestaurant="frenchTraditionalRestaurant"
               :satFastFood="satFastFood" :standingFastFood="standingFastFood" :barAndCoffee="barAndCoffee" :tea="tea" :artGallery="artGallery" :localProduct="localProduct"
               :souvenirShop="souvenirShop" :balade="balade" :atelierCours="atelierCours" :conferenceDebat="conferenceDebat" :stage="stage" :visiteGuidee="visiteGuidee"
               :loisirsJeux="loisirsJeux" :lectureRencontre="lectureRencontre" :autreAnimation="autreAnimation" :humour="humour" :danse="danse" :theatre="theatre"
@@ -42,6 +42,7 @@ export default {
   mounted(){
     this.onResize();
 
+    //Initialize everything (get every api data)
     this.initZonesTouristiques();
     this.initToilets();
     this.initMuseums();
@@ -109,11 +110,17 @@ export default {
     }
   },
   methods: {
+    //Methode used to resize component depending on the windows width.
     onResize () {
         this.size = window.innerWidth < 960 ? window.innerWidth  : window.innerWidth/4;
     },
+    //Update the local filters when the filter component is updated.
     onFiltersUpdated(filters){
       this.filters = filters;
+    },
+    //Emit a message to say that the selected row has changed.
+    onSelectedRow(id){
+      this.$root.$emit('selectedRowChanged', id);
     },
     initZonesTouristiques(){
       var thisRef = this;

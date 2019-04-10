@@ -4,7 +4,7 @@
     <v-dialog v-model="dialog" persistent max-width="600px">
       <v-card>
         <v-card-title>
-          <span class="headline">Add on planning</span>
+          <span class="headline">Add to planning</span>
         </v-card-title>
         <v-card-text>
           <v-date-picker
@@ -24,7 +24,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click="addToPlanning()">Add on my planning</v-btn>
+          <v-btn color="blue darken-1" flat @click="addToPlanning()">Add to my planning</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -102,6 +102,25 @@ export default {
       this.updateLayers();
     }
   },
+  mounted() {
+    this.initMap();
+    this.initLayers();
+
+    var thisRef = this;
+    this.isAuthenticated = AuthenticationManager.isAuthenticated();
+    //When used connect, update ui.
+    this.$root.$on('authenticated', () => {
+      thisRef.isAuthenticated = true;
+    })
+    //When used disconnect, update ui.
+    this.$root.$on('notauthenticated', () => {
+      thisRef.isAuthenticated = false;
+    })
+    //When a row is selected, zoom over the corresponding marker
+    this.$root.$on('selectedRowChanged', (id) => {
+      thisRef.zoomOverMarker(id);
+    })
+  },
   data (){
     return {
       isAuthenticated: false,
@@ -171,7 +190,10 @@ export default {
 
       dialog: false,
       currentSelectedElementName: "",
-      currentSelectedElementType: ""
+      currentSelectedElementType: "",
+
+
+      markersLoaded: []
     }
   },
   computed: {
@@ -190,6 +212,7 @@ export default {
       var expositionsCat = false;
       var concertsCat = false;
 
+      //Loop through every filter and add corresponding layer(s) to the map.
       this.selectedFilters.forEach(function(activity){
             shopCat = false;
             restaurantCat = false;
@@ -540,26 +563,14 @@ export default {
       return result;
     }
   },
-  mounted() {
-    this.initMap();
-    this.initLayers();
-
-    var thisRef = this;
-    this.isAuthenticated = AuthenticationManager.isAuthenticated();
-    this.$root.$on('authenticated', () => {
-      thisRef.isAuthenticated = true;
-    })
-    this.$root.$on('notauthenticated', () => {
-      thisRef.isAuthenticated = false;
-    })
-  },
   methods: {
     initMap() {
       this.map = L.map('leafletMap').setView([48.860637, 2.340873], 12);
 
       this.tileLayer = L.tileLayer(
-        'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
+        'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
         {
+          id: 'mapbox.streets',
           maxZoom: 18,
           attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
         }
@@ -571,6 +582,15 @@ export default {
       var thisRef = this;
       this.layers.forEach(function(layer){
         thisRef.showLayer(layer);
+      });
+    },
+    //Method used to zoom to the location of a marker.
+    zoomOverMarker(id){
+      var thisRef = this;
+      this.markersLoaded.forEach(function(marker){
+        if (marker.id == id) {
+          thisRef.map.flyTo([marker.pos[1], marker.pos[0]], 18);
+        }
       });
     },
     updateLayers(){
@@ -610,11 +630,14 @@ export default {
       );
       this.dialog = false;
     },
+    //Method used to show markers in parameter
     showLayer(layer){
-      this.map.addLayer(layer)
+      this.map.addLayer(layer);
     },
+    //Method used to hide markers in parameter
     hideLayers(layer){
       this.map.removeLayer(layer);
+      this.popups[0].zoomOverMarker();
     },
     getGeojsonFeature(id, title, type, isPlannifiable, geometry){
       var geojsonFeature = {
@@ -632,6 +655,7 @@ export default {
       };
       return geojsonFeature;
     },
+    //Methode used to add a popup to a marker.
     onEachFeature(feature, layer) {
       var thisRef = this;
 
@@ -663,6 +687,7 @@ export default {
 
       // Insert the container into the popup
       layer.bindPopup(container[0]);
+      this.markersLoaded.push({id: feature.properties.id, pos: feature.geometry.coordinates});
     },
     getZonesTouristiquesLayer(){
       if (this.zonesTouristiquesLayers == undefined) {
@@ -682,12 +707,13 @@ export default {
 
       return this.zonesTouristiquesLayers; 
     },
+    //Method used for the creation of markers clusters, for the API data
     getMarkers(type, color, data, isPlannifiable){
       var markers = L.markerClusterGroup();
       var thisRef = this;
 
       data.forEach(element => {
-
+        //Style of the marker
         var geojsonMarkerOptions = {
             radius: 8,
             fillColor: color,
@@ -696,7 +722,7 @@ export default {
             opacity: 1,
             fillOpacity: 0.8
         };
-
+        //If why have geometry information then we can create the marker.
         if (element.geometry != undefined) {
           var marker = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, type, isPlannifiable, element.geometry), {
               onEachFeature: thisRef.onEachFeature,
@@ -920,7 +946,7 @@ export default {
     margin: 10vw;
   }
   #leafletMap { 
-    height: 100%;
+    height: 30vw;
     z-index: 0;
   }
   #leafletMapContainer{
