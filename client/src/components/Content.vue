@@ -1,6 +1,6 @@
 <template>
   <div id="content-container">
-    <Filters :onFiltersUpdated="onFiltersUpdated"/>
+    <Filters :onDateUpdated="onDateUpdated" :onFiltersUpdated="onFiltersUpdated"/>
     <v-layout row wrap fill-height :style="'min-height: ' + size + 'px;'">
           <v-flex  md6 sm12 :style="'min-height: ' + size + 'px;'">
               <DataSelector :onSelectedRow="onSelectedRow" :selectedFilters="filters" :zonesTouristiques="zonesTouristiques" :toilets="toilets" :museums="museums" :frenchTraditionalRestaurant="frenchTraditionalRestaurant"
@@ -53,6 +53,7 @@ export default {
     return{
       err: "",
       filters: [],
+
       zonesTouristiques: [],
       toilets: [],
       museums: [],
@@ -117,6 +118,10 @@ export default {
     //Update the local filters when the filter component is updated.
     onFiltersUpdated(filters){
       this.filters = filters;
+    },
+    //Update the date
+    onDateUpdated(date){
+      this.$root.$emit('onDateChanged', date);
     },
     //Emit a message to say that the selected row has changed.
     onSelectedRow(id){

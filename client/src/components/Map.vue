@@ -7,19 +7,33 @@
           <span class="headline">Add to planning</span>
         </v-card-title>
         <v-card-text>
-          <v-date-picker
-            v-model="date"
-            full-width
-            landscape
-            class="mt-3"
-          ></v-date-picker>
+          <v-stepper vertical v-if="allowedDates == undefined">
+            <v-stepper-step :rules="[() => false]">
+              You haven't selected a date before, you can add to your planning but the weather prevision won't be taken under consideration
+            </v-stepper-step>
+          </v-stepper>
+          <div v-if="allowedDates !== undefined">
+            <v-date-picker
+              v-model="date"
+              full-width
+              landscape
+              :allowed-dates="allowedDates"
+              class="mt-3"
+              v-validate="'required'" :items="items" :error-messages="errors.collect('dateSelection')" data-vv-name="dateSelection" required></v-date-picker>
+          </div>
+          <div v-else>
+            <v-date-picker
+              v-model="date"
+              full-width
+              landscape
+              class="mt-3"
+              v-validate="'required'" :items="items" :error-messages="errors.collect('dateSelection')" data-vv-name="dateSelection" required
+            ></v-date-picker>
+          </div>
           <br/>
-          <v-select
-            v-model="moment"
-            :items="items"
-            label="Outline style"
-            outline
-          ></v-select>
+          <v-select v-model="moment" v-validate="'required'" :items="items" :error-messages="errors.collect('select')" label="Outline style"
+              data-vv-name="select" required>
+          </v-select>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -120,6 +134,10 @@ export default {
     this.$root.$on('selectedRowChanged', (id) => {
       thisRef.zoomOverMarker(id);
     })
+    //When a row is selected, zoom over the corresponding marker
+    this.$root.$on('onDateChanged', (data) => {
+      thisRef.allowedDates = val => val == data;
+    })
   },
   data (){
     return {
@@ -128,6 +146,21 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       moment: undefined,
       items: ['Morning', 'Afternoon', 'Evening', 'Night'],
+      allowedDates: undefined,
+
+      select: null,
+      dateSelection: null,
+
+      dictionary: {
+        custom: {
+          select: {
+            required: 'Moment required'
+          },
+          dateSelection: {
+            required: 'You need to select a valid date'
+          }
+        }
+      },
 
 
       map: null,
@@ -612,6 +645,7 @@ export default {
       this.lastLayers = this.layers;
     },
     addToPlanning(){
+      var thisRef = this;
       DataManager.saveOnPlanning(
         {
           user: AuthenticationManager.getUserId(),
@@ -623,6 +657,7 @@ export default {
         },
         function(){
           //Nothing everything good
+          thisRef.moment = undefined;
         },
         function(err){
           alert(err);

@@ -42,7 +42,8 @@ import DataManager from '../utils/DataManager.js';
 export default {
   name: 'Filters',
   props: {
-    onFiltersUpdated: { type: Function }
+    onFiltersUpdated: { type: Function },
+    onDateUpdated: { type: Function }
   },
   data: () => ({
       isLoading: false,
@@ -86,6 +87,8 @@ export default {
         function(){
           alert("Opps something gone wrong");
         });
+
+        this.onDateUpdated(this.date);
       }
     }
   },
