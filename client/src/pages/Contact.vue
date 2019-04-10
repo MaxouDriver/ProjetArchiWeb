@@ -110,7 +110,7 @@ import DataManager from '../utils/DataManager.js';
 <style scoped>
   #container{
     padding: 4vw;
-    margin: 4vw;
+    margin: 8vw;
   }
 </style>
 

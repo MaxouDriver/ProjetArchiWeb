@@ -16,7 +16,21 @@
         </v-flex>
 
         <v-flex v-if="!isAuthenticated">
-          <h1>You need to be authenticated to get a planning</h1>
+          <v-card class="mx-auto" max-width="400">
+            <v-card-title>
+              <span class="title font-weight-light">Oops</span>
+            </v-card-title>
+
+            <v-card-text class="headline font-weight-bold">
+              You need to be authenticated to get a planning
+            </v-card-text>
+
+            <v-card-actions>
+              <v-btn class="blue lighten-2 mt-5" dark block v-on:click="connect()">
+                {{buttonName}}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
         </v-flex>
       </v-layout>
     </section>
@@ -29,7 +43,8 @@ import DataManager from '../utils/DataManager.js'
     data: () => ({
       isAuthenticated: false,
       today: '1998-03-27',
-      events: []
+      events: [],
+      buttonName: "Connection"
     }),
     mounted() {
       var thisRef = this;
@@ -122,6 +137,9 @@ import DataManager from '../utils/DataManager.js'
       }
     },
     methods: {
+      connect () {
+        this.$router.push("/login");
+      },
       open (event) {
         alert(event.title)
       }
@@ -133,7 +151,7 @@ import DataManager from '../utils/DataManager.js'
 
 <style scoped>
   #container{
-    padding: 4vw;
+    padding: 8vw;
   }
   .my-event {
     border: 2px solid rgba(255, 255, 255, 1);
