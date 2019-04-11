@@ -7,14 +7,16 @@ exports.saveOnPlanning = function(req, res){
 
     ref.once('value', function(snapshot) {
         var length = 0;
+        var alreadyPlanned = false;
         snapshot.forEach(function(childSnapshot) {
             if (childSnapshot.val().title == req.body.name){
-                res.json({success: false, message: "You already planned this event"});
-                return;
+                alreadyPlanned = true;
             }
             length++;
         });
-        if(length < 6){
+        if (alreadyPlanned) {
+            res.json({success: false, message: "You already planned this event"});
+        }else if(length < 6){
             ref.push().set({
                 title: req.body.name, 
                 type: req.body.type
@@ -23,6 +25,7 @@ exports.saveOnPlanning = function(req, res){
         }else{
             res.json({success: false, message: "Too many element at the moment of the selection"});
         }
+        return;
     });
 };
 

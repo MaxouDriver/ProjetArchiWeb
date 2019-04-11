@@ -13,3 +13,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  #firebaseui-auth-container{
+    padding: 8vw;
+  }
+</style>
