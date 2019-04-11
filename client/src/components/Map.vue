@@ -7,11 +7,14 @@
           <span class="headline">Add to planning</span>
         </v-card-title>
         <v-card-text>
-          <v-stepper vertical v-if="allowedDates == undefined">
-            <v-stepper-step :rules="[() => false]">
-              You haven't selected a date before, you can add to your planning but the weather prevision won't be taken under consideration
-            </v-stepper-step>
-          </v-stepper>
+          <v-layout row wrap v-if="allowedDates == undefined">
+            <v-flex md2>
+              <v-icon color="red">warning</v-icon>
+            </v-flex>
+            <v-flex md10>
+              <p style="color: red;">You haven't selected a date before, you can add to your planning but the weather prevision won't be taken under consideration</p>
+            </v-flex>
+          </v-layout>
           <div v-if="allowedDates !== undefined">
             <v-date-picker
               v-model="date"
@@ -147,12 +150,12 @@ export default {
       isAuthenticated: false,
 
       date: new Date().toISOString().substr(0, 10),
-      moment: undefined,
+      moment: '',
       items: ['Morning', 'Afternoon', 'Evening', 'Night'],
       allowedDates: undefined,
 
-      select: null,
-      dateSelection: null,
+      select: '',
+      dateSelection: '',
 
       dictionary: {
         custom: {
@@ -247,7 +250,7 @@ export default {
     },
     clear () {
       this.date = new Date().toISOString().substr(0, 10);
-      this.moment = undefined;
+      this.moment = '';
       this.$validator.reset();
       this.dialog = false;
     },

@@ -93,8 +93,7 @@ export default {
     getCorrectList(){
       if (this.isAuthenticated) {
         return [
-          {value: "Logout", route: "/"},
-          {value: "Settings", route: "/"}
+          {value: "Logout", route: "/"}
           ];
       }else{
         return [
