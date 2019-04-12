@@ -11,6 +11,7 @@ Le coté client utilise plusieurs bibliothèques pour fonctionner :
 * [vue-router] - Vue-router, router qui nous permet de faire la navigation dans notre application
 * [vuefire] - Vuefire, integration de firebase a VueJS
 * [vuetify] - Vuefire, le framework css que ne avons choisi
+* [vee-validate] - Outils permettant de gérer les erreurs dans nos formulaires.
 
 ### Installation
 
