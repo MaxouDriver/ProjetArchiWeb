@@ -119,7 +119,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/mail/send', function(req, res) {
-  
+  console.log('/mail/send called!');
   sendMail(req.body.name, req.body.email, req.body.subject, req.body.text, 
     function(info){
       res.json({ success: true, message: "Message sent: %s" + info.messageId});

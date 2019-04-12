@@ -117,9 +117,9 @@
 
             switch(activity.name){
 
-              case "Touristiques area":
+              case "Tourist areas":
                 thisRef.zonesTouristiques.forEach(element => {
-                  result.push({id: element.id, name: element.name, cathegory: 'Zones touristiques'});
+                  result.push({id: element.id, name: element.name, cathegory: 'Tourist areas'});
                 });
                 break;
 

@@ -118,8 +118,8 @@ exports.getFilters = function(req, res){
             },
             {
               id: 1,
-              name: 'Touristiques area',
-              display_name: 'Touristiques area',
+              name: 'Tourist areas',
+              display_name: 'Tourist areas',
               condition: condition.belle
             },
             {

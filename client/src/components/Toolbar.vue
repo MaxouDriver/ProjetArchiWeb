@@ -14,7 +14,9 @@
       </v-navigation-drawer>      
       <v-toolbar class="white" fixed app>
         <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-toolbar-title v-text="title"></v-toolbar-title>
+        <v-toolbar-title v-text="title" style="font-size: 5vw;"></v-toolbar-title>
+        <img 
+        src="https://cdn.discordapp.com/attachments/550304221342466071/560212107933777941/ParisGo9.png" style="width: 6vw;"/>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn
@@ -26,7 +28,7 @@
         </v-toolbar-items>
 
         <v-menu>
-            <v-btn slot="activator" icon color="success">
+            <v-btn slot="activator" icon color="#00a8ff">
               <v-icon>face</v-icon>
             </v-btn>
             <v-list>
@@ -52,7 +54,7 @@ export default {
       return {
           drawer: false,
 
-          title: "ParisGo",
+          title: "Paris",
           isAuthenticated: false,
           img: "https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png",
           menu: [

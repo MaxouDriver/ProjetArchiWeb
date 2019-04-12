@@ -142,6 +142,7 @@ export default {
     })
     //When a row is selected, zoom over the corresponding marker
     this.$root.$on('onDateChanged', (data) => {
+      thisRef.date = data;
       thisRef.allowedDates = val => val == data;
     })
   },
@@ -387,7 +388,7 @@ export default {
 
         this.zonesTouristiques.forEach(element => {
           
-          var zones = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, "Touristism area", true, element.geometry), {
+          var zones = L.geoJSON(thisRef.getGeojsonFeature(element.id, element.name, "Tourist areas", true, element.geometry), {
               onEachFeature: thisRef.onEachFeature
           });
           result.push(zones);
@@ -660,7 +661,7 @@ export default {
 
             switch(activity.name){
 
-              case "Touristiques area":
+              case "Tourist areas":
                 thisRef.getZonesTouristiquesLayer().forEach(function(e){
                   result.push(e);
                 });
