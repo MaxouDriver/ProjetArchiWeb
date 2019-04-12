@@ -7,7 +7,7 @@
                 <div class="white--text ml-3">
                     Made with
                     <v-icon class="red--text">favorite</v-icon>
-                    by Benjamin Nouvelière, Renaud Loup et Maxime Pocard
+                    by Benjamin Nouvelière, Renaud Loup and Maxime Pocard
                     with <a class="white--text" href="https://vuetifyjs.com" target="_blank">Vuetify</a>
                     and with the help of <a class="white--text" href="https://github.com/vwxyzjn">Costa Huang</a>
                 </div>
