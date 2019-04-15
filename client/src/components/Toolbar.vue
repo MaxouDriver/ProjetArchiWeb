@@ -14,9 +14,9 @@
       </v-navigation-drawer>      
       <v-toolbar class="white" fixed app>
         <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-toolbar-title v-text="title" style="font-size: 5vw;"></v-toolbar-title>
+        <v-toolbar-title v-text="title" style="font-size: 3vw;"></v-toolbar-title>
         <img 
-        src="https://cdn.discordapp.com/attachments/550304221342466071/560212107933777941/ParisGo9.png" style="width: 6vw;"/>
+        src="https://cdn.discordapp.com/attachments/550304221342466071/560212107933777941/ParisGo9.png" style="width: 4vw;"/>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn
